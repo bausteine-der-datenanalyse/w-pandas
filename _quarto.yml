@@ -16,6 +16,8 @@ book:
   date: today # "2024-03-05" Jahr-Monat-Tag / year-month-day
   chapters:
     - index.qmd
+    - einleitung.qmd
+    - operationen.qmd
 
 
   sidebar:

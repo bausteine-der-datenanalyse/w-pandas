@@ -1,0 +1,208 @@
+# Operationen
+Pandas erlaubt wie NumPy vektorisierte Operationen, das heißt Berechnungen mit einer Series oder einem DataFrame werden auf jedes Element angewendet. So können die Rechenoperatoren direkt verwendet werden.
+
+```{python}
+#| echo: false
+# recreate DataFrame from previous chapter
+import numpy as np
+import pandas as pd
+
+# DataFrame erzeugen
+temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5])
+temperaturen_2022 = pd.Series([3, 6, 9, 13, 18, 21, 24, 23, 19, 14, 8, 4])
+temperaturen_2023 = pd.Series([-3, -1, 4, 9, 15, 20, 20, 19, 16, 15, 7, 6])
+temperaturen_2024 = pd.Series([-1, 2, 5, 8, 17, 24, 25, 20, 17, 14, 9, 2])
+
+temperaturen = pd.concat([temperaturen_2021, temperaturen_2022, temperaturen_2023, temperaturen_2024], axis = 1)
+temperaturen.columns = [2021, 2022, 2023, 2024]
+temperaturen.index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+```
+
+```{python}
+print("Temperaturen in Celsius:")
+print(27 * "=")
+print(temperaturen, "\n")
+
+print("Temperaturen in Fahrenheit:")
+print(27 * "=")
+print(temperaturen  * 9/5 + 32)
+```
+
+Auch boolsche Operationen können direkt ausgeführt werden. 
+
+```{python}
+print("Minusgrade:")
+print(27 * "=")
+print(temperaturen  < 0)
+```
+
+## Zeilen- und spaltenweise Operationen
+Pandas umfasst eine Vielzahl von Methoden, die arithmetische, summarische, boolsche und Indexfunktionen umsetzen. Eine vollständige Übersicht finden Sie hier: <https://pandas.pydata.org/docs/reference/index.html>.
+
+In der Regel werden die Funktionen standardmäßig spaltenweise angewendet. Mit dem Argument `axis = 1` wird die jeweilige Funktion zeilenweise ausgeführt. Die Funktionen sind auch für Series verfügbar.
+
+Im Folgenden werden einige Methoden exemplarisch vorgestellt.
+
+### arithmetische Funktionen
+Die Methoden `pd.DataFrame.add()`, `pd.DataFrame.sub()`, `pd.DataFrame.mul()`, `pd.DataFrame.div()`, `pd.DataFrame.floordiv()`, `pd.DataFrame.mod()` und `pd.DataFrame.pow()` entsprechen den Grundrechenarten mit den Operatoren  +, -, *, /, //, %, **. Sie eignen sich gut für verkettete Operationen.
+
+```{python}
+print("Temperaturen in Fahrenheit:")
+print(27 * "=")
+print(temperaturen.mul(9).div(5).add(32))
+```
+
+Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt).
+
+```{python}
+missing_value = pd.Series([1, pd.NA, 3])
+print(missing_value.add(1, fill_value = -999))
+```
+
+### summarische Funktionen
+
+  - `pd.DataFrame.mean()` ermittelt den Durchschnitt jeder Spalte / Zeile.
+  - `pd.DataFrame.median()` ermittelt den Median jeder Spalte / Zeile.
+  - `pd.DataFrame.mode()` ermittelt den Modus jeder Spalte / Zeile.
+  - `pd.DataFrame.sum()` ermittelt die Summe jeder Spalte / Zeile. `pd.DataFrame.cumsum()` ermittelt die kummulierte Summe jeder Spalte / Zeile.
+  - `pd.DataFrame.min()` und `pd.DataFrame.max()` ermitteln Minimum bzw. Maximum jeder Spalte / Zeile. `pd.DataFrame.cummin()` und `pd.DataFrame.cummax()` ermittelt den kummulierten Durchschnitt jeder Spalte / Zeile.
+
+```{python}
+print("Mittlere Jahrestemperaturen")
+print(27 * "=")
+print(temperaturen.mean(), "\n")
+
+print("Monatliche Mindesttemperatur")
+print(28 * "=")
+print(temperaturen.min(axis = 1))
+```
+
+### boolsche Funktionen
+Pandas bietet wie die Pythonbasis verschiedene boolsche Funktionen.
+
+`pd.DataFrame.isin(values)` prüft für jedes Element des DataFrame, ob dieses in `values` enthalten ist. Mit dem Operator `~` kann geprüft werden, ob die Elemente eines DataFrame nicht in `values` enthalten sind: `~pd.DataFrame.isin(values)`.  
+  Die Funktionsausführung ist abhängig vom Datentyp des in `values` übergebenen Objekts.
+  - Wenn `values` eine Liste oder ein NumPy-Array ist, ist das Ergebnis True, wenn es eine Übereinstimmung mit einem der enthaltenen Elemente gibt.
+  - Ist `value` eine Series oder ein DataFrame, wird die Übereinstimmung positionsbasiert überprüft (siehe Beispiel).
+
+::: {#nte-isin .callout-note collapse="true"}
+## klassenabhängige Funktionsausführung
+
+:::: {.panel-tabset}
+## Einzelwerte oder Liste
+für Einzelwerte oder eine Liste wird die Übereinstimmung elementweise überprüft.
+```{python}
+print(temperaturen, "\n")
+
+print(temperaturen.isin([2, 3]))
+```
+
+## NumPy-Array
+Für ein NumPy-Array wird die Übereinstimmung elementweise überprüft (vergleiche zum nächsten Reiter).
+```{python}
+print(type(temperaturen[2021].values), "\n")
+
+print(temperaturen.isin(temperaturen[2021].values))
+```
+
+## Series
+Für eine Series wird die Übereinstimmung positionsweise geprüft (vergleiche zum vorherigen Reiter). Der Index muss übereinstimmen.
+```{python}
+print(temperaturen.isin(temperaturen[2021]), "\n")
+
+temperaturen_2021_falscher_index = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5])
+temperaturen_2021_falscher_index.index = ['A', 'B', 'C', 'D', 'E', 'F', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+
+print("Der Index der Series lautet:\n['A', 'B', 'C', 'D', 'E', 'F', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']. Das Ergebnis an den Indexpositionen A-F ist immer False.")
+print(temperaturen.isin(temperaturen_2021_falscher_index))
+
+```
+
+## DataFrame
+Für einen DataFrame wird die Übereinstimmung positionsweise geprüft. Index und Spaltennamen müssen übereinstimmen (Index siehe Reiter Series).
+
+```{python}
+temperaturen_2021_df = pd.DataFrame(temperaturen[2021])
+print(temperaturen.isin(temperaturen_2021_df), "\n")
+
+temperaturen_2021_df.columns = [2035]
+print(temperaturen.isin(temperaturen_2021_df), "\n")
+
+```
+
+::::
+:::
+
+
+::: {#tip-documentation .callout-tip}
+## Überraschungen vermeiden
+
+Eine klassenabhängige Funktionsausführung kann, wenn das Verhalten unbemerkt bleibt, die Ergebnisse einer Datenanalyse verfälschen. Um dies zu verhindern, sollten Sie 3 allgemeine Ratschläge befolgen:
+
+1. Schauen Sie in die Dokumentation der jeweiligen Funktion. Python und viele Module entwickeln sich dynamisch, sodass auch eine bereits bekannte Funktion ein neues Verhalten aufweisen kann.
+
+2. Gehen Sie schrittweise vor und lassen sich die Zwischenergebnisse von Arbeitsschritten mit der Funktion `print()` ausgeben.
+
+3. Bei großen Datenmengen ist es häufig einfacher, mit eigens erzeugten Testdaten zu arbeiten. Ein zehnzeiliger DataFrame mit den Datentypen und der Struktur der Arbeitsdaten, ist leichter zu überblicken. Nutzen Sie einen solchen Testdatensatz um die von Ihnen verwendeten Funktionen zu überprüfen.
+:::
+
+Eine Gruppe von Funktionen setzt logische Vergleiche um.
+
+| Funktion | Vergleich |
+|---|---|
+| `pd.DataFrame.lt(other)` | kleiner |
+| `pd.DataFrame.le(other)` | kleiner gleich |
+| `pd.DataFrame.eq(other)` | gleich |
+| `pd.DataFrame.ne(other)` | ungleich |
+| `pd.DataFrame.ge(other)` | größer gleich |
+| `pd.DataFrame.gt(other)` | größer |
+
+## Suchen und ersetzen
+Um die Indexposition eines bestimmten Werts zu bestimmen, kann die Numpy-Funktion `np.where()` verwendet werden. Diese gibt zwei Arrays mit den jeweiligen Zeilen- und Spaltennummern zurück.
+
+``` {python}
+print(np.where(temperaturen == 4))
+```
+
+Unter anderem befindet sich der Wert 4 in Zeile 1 in Spalte 0.
+
+```{python}
+print(temperaturen.iloc[1, 0])
+```
+
+Pandas bietet zwei Methoden, um Werte zu ersetzen.
+  
+  - `pd.DataFrame.replace(to_replace, value, *, inplace = False)` ersetzt `to_replace` mit value. Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
+
+  - `pd.where(cond, other, inplace = False)` behält `cond` und ersetzt alle anderen Werte mit `other`. Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
+
+Die Syntax beider Funktionen unterscheidet sich leicht, wie im folgenden Beispiel zu sehen ist.
+```{python}
+print(temperaturen.replace(to_replace = 25, value = 1000), "\n")
+print(temperaturen.where(temperaturen == 25, other = 1000))
+```
+
+## Sortieren
+DataFrame.sort_index() sorts by an axis:
+
+DataFrame.sort_values() sorts by values:
+
+https://pandas.pydata.org/docs/user_guide/10min.html
+
+## GroupBy
+eventl. als 2.2
+https://pandas.pydata.org/docs/reference/groupby.html
+
+
+--> das GroupBy-Objekt kann man sich leider nicht angucken oder geht das irgendwie?
+
+## Funktionen für Funktionen :-)
+ pipe, apply usw.
+https://pandas.pydata.org/docs/user_guide/basics.html#function-application
+
+Für die meisten Funktionen stehen Methoden zur Verfügung. --> Sehr viele --> Tipp: In der Dokumentation nachschlagen.
+
+
+
+## Aufgaben Operationen
+1. Wählen Sie aus dem DataFrame meerschweinchen alle Zeilen der Spalte 'dose' mit den Werten 0.5 und 2.0 aus. Vergleichen Sie nun die durchschnittliche Länge der zahnbildenden Zellen ('len') nach der Dosis und der Art der Gabe von Vitamin C (VC) bzw. Orangensaft (OJ) (Spalte 'supp'). (Code zum Einlesen der Datei siehe @lst-readfile) 
