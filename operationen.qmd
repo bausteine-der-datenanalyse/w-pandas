@@ -16,6 +16,11 @@ temperaturen_2024 = pd.Series([-1, 2, 5, 8, 17, 24, 25, 20, 17, 14, 9, 2])
 temperaturen = pd.concat([temperaturen_2021, temperaturen_2022, temperaturen_2023, temperaturen_2024], axis = 1)
 temperaturen.columns = [2021, 2022, 2023, 2024]
 temperaturen.index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+
+# meerschweinchen einlesen
+dateipfad = "skript/01-daten/ToothGrowth.csv"
+meerschweinchen = pd.read_csv(filepath_or_buffer = dateipfad, sep = ',', header = 0, \
+  names = ['ID', 'len', 'supp', 'dose'], dtype = {'ID': 'int', 'len': 'float', 'dose': 'float', 'supp': 'category'})
 ```
 
 ```{python}
@@ -55,6 +60,7 @@ print(temperaturen.mul(9).div(5).add(32))
 Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt).
 
 ```{python}
+#| warning: false
 missing_value = pd.Series([1, pd.NA, 3])
 print(missing_value.add(1, fill_value = -999))
 ```
@@ -157,6 +163,11 @@ Eine Gruppe von Funktionen setzt logische Vergleiche um.
 | `pd.DataFrame.ge(other)` | größer gleich |
 | `pd.DataFrame.gt(other)` | größer |
 
+### Verwendung von DF.agg() und DF.apply()
+Pandas bringt zwei eigene Methoden mit, um Operationen zeilen- oder spaltenweise auszuführen. 
+
+Die Pandas-Methode `DataFrame.agg()` aggregiert einen DataFrame zeilen- oder spaltenweise durch eine spezifizierbare Funktion. Die Pandas-Methode `DF.apply()` wendet eine Funktion zeilen- oder spaltenweise auf einen DataFrame an. Die Methoden machen also das selbe. Details zur Verwendung des [Lambda-Ausdrucks](https://docs.python.org/3/reference/expressions.html#lambda) und der Methode `join` aus der [Pythonbasis](https://www.w3schools.com/python/ref_string_join.asp) finden Sie in den angegebenen Links.
+
 ## Suchen und ersetzen
 Um die Indexposition eines bestimmten Werts zu bestimmen, kann die Numpy-Funktion `np.where()` verwendet werden. Diese gibt zwei Arrays mit den jeweiligen Zeilen- und Spaltennummern zurück.
 
@@ -164,17 +175,18 @@ Um die Indexposition eines bestimmten Werts zu bestimmen, kann die Numpy-Funktio
 print(np.where(temperaturen == 4))
 ```
 
-Unter anderem befindet sich der Wert 4 in Zeile 1 in Spalte 0.
+Unter anderem befindet sich der Wert 4 in Zeile 1 in Spalte 0 oder auch in Zeile 2 in Spalte 2.
 
 ```{python}
 print(temperaturen.iloc[1, 0])
+print(temperaturen.iloc[2, 2])
 ```
 
 Pandas bietet zwei Methoden, um Werte zu ersetzen.
   
-  - `pd.DataFrame.replace(to_replace, value, *, inplace = False)` ersetzt `to_replace` mit value. Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
+  - `pd.DataFrame.replace(to_replace, value, *, inplace = False)` ersetzt `to_replace` mit `value`. Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
 
-  - `pd.where(cond, other, inplace = False)` behält `cond` und ersetzt alle anderen Werte mit `other`. Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
+  - `pd.where(cond, other = nan, inplace = False)` behält `cond` und ersetzt alle anderen Werte mit `other` (standardmäßig ein Platzhalter für fehlende Werte). Mit dem Argument `inplace = True` erfolgt dies direkt im Objekt.
 
 Die Syntax beider Funktionen unterscheidet sich leicht, wie im folgenden Beispiel zu sehen ist.
 ```{python}
@@ -182,19 +194,120 @@ print(temperaturen.replace(to_replace = 25, value = 1000), "\n")
 print(temperaturen.where(temperaturen == 25, other = 1000))
 ```
 
+## Aufgaben suchen und ersetzen
+**to do**
+
 ## Sortieren
-DataFrame.sort_index() sorts by an axis:
+Die Methode `DataFrame.sort_index(axis = 0, ascending = True, inplace = False)` sortiert entlang einer Achse, standardmäßig aufsteigend nach dem Index. Durch die Übergabe des Arguments `axis = 1` werden die Spalten sortiert. Mit dem Argument `ascending = False` wird absteigend sortiert. Das Argument `inplace = True` sorgt, wie gewohnt, dafür, dass das Ergebnis des Sortiervorgangs direkt im Objekt gespeichert wird.
 
-DataFrame.sort_values() sorts by values:
+``` {python}
+print(temperaturen.sort_index(), "\n")
+print(temperaturen.sort_index(axis = 1, ascending = False))
+```
 
-https://pandas.pydata.org/docs/user_guide/10min.html
+Die Methode `DataFrame.sort_values(by, *, axis = 0, ascending = True, inplace = False)` sortiert Werte entlang einer Achse, standardmäßig entlang des Index (`axis = 0`). Dem Parameter `by` sind [laut Dokumentation](https://pandas.pydata.org/pandas-docs/version/2.1/reference/api/pandas.DataFrame.sort_values.html) der Spaltenname als string bzw. eine Liste von Spaltennamen als string zu übergeben, nach denen sortiert werden soll. Wie im folgenden Code-Beispiel zu sehen ist, muss die numerische Spaltenbeschriftung auch entsprechend übergeben werden.
+
+Wird mit dem Argument `axis = 1` entlang der zweiten Dimension sortiert, werden entsprechend Indexbeschriftungen übergeben.
+
+```{python}
+# Sortieren nach numerischen Spaltenbeschriftungen
+print(temperaturen.sort_values(by = 2021), "\n")
+print(temperaturen.sort_values(by = [2021, 2023]), "\n")
+
+# Sortieren nach als string übergebenen Spaltenbeschriftungen
+# führt zu KeyError, die Fehlermeldung wird nicht vollständig abgefangen
+try:
+  print(temperaturen.sort_values(by = '2021'))
+except Exception as error:
+  print(error)
+```
+
+## Aufgaben Sortieren
+**to do**
 
 ## GroupBy
-eventl. als 2.2
-https://pandas.pydata.org/docs/reference/groupby.html
+Die Methode `pd.groupby()` teilt einen DataFrame (oder eine Series) in Gruppen auf und gibt ein GroupBy-Objekt zurück. Das GroupBy-Objekt hat dieselben Spalten- und Zeilenbeschriftungen, wie der DataFrame, das GroupBy-Objekt ist aber nach der Gruppenaufteilung sortiert. Operationen, die auf das GroupBy-Objekt angewendet werden, werden für jede Gruppe separat ausgeführt. 
 
+Dies kann am Datensatz 'meerschweinchen' im folgenden Panel nachvollzogen werden.
 
---> das GroupBy-Objekt kann man sich leider nicht angucken oder geht das irgendwie?
+  1. Reiter: Der Datensatz enthält 60 Einträge. Die ersten 30 Einträge haben in der Spalte 'supp' die Ausprägung VC für Vitamin C, die letzten 30 Einträge die Ausprägung OJ für Orangensaft.
+  
+  2. Reiter: Mit der Methode `pd.groupby('supp')` kann der Datensatz nach den Merkmalsausprägungen in der Spalte 'dose' (0.5, 1 und 2) gruppiert werden.
+
+  3. Reiter: Auf das Groupby-Objekt können Operationen ausgeführt werden. Beispielsweise kann die Spalte 'len' ausgewählt und mit der Methode `.mean()` die mittlere Länge der zahnbildenden Zelle bestimmt werden.
+
+  4. Reiter: Ebenso kann nach den Ausprägungen mehrerer Merkmale gruppiert werden, indem diese als Liste übergeben werden `pd.groupby(by = ['supp', 'dose'])`.
+
+::: {.panel-tabset}
+## DataFrame meerschweinchen
+
+```{python}
+print(meerschweinchen.head(n = 12))
+```
+
+## meerschweinchen gruppiert nach Verabreichungsart
+Für die Methode `.head()` wurde das Argument n halbiert, um die gleiche Zeilenzahl in der Ausgabe anzeigen zu lassen, da auch diese Methode für jede der beiden Gruppen (VC und OJ) ausgeführt wird. 
+
+```{python}
+#| warning: false
+print(meerschweinchen.groupby('supp').head(n = 6))
+```
+
+## Länge nach Verabreichungsart
+```{python}
+#| warning: false
+print(meerschweinchen.groupby(by = 'supp')['len'].mean())
+```
+
+## Länge nach Verabreichungsart und Dosis
+
+```{python}
+#| warning: false
+print(meerschweinchen.groupby(by = ['supp', 'dose'])['len'].mean())
+```
+
+:::
+
+## Aufgaben GroupBy
+
+Der Datensatz Motor Trend Car Road Tests (mtcars) stammt aus der us-amerikanischen 
+Zeitschrift Motor Trend von 1974 und enthalt Daten für 32 Autos.
+
+::: {.border}
+
+:::: {#lst-readfile2}
+```{python}
+mtcars = pd.read_csv(filepath_or_buffer = "C:/Users/mapoe004/Desktop/Arbeitsordner Maik Poetzsch/BCD/Bausteine/Werkzeugbausteine/w-Pandas/w-pandas/aufgaben/01-daten/mtcars.csv", sep = ",")
+mtcars.rename(columns = {'Unnamed: 0': 'car'}, inplace = True)
+
+mtcars.head()
+```
+
+::::
+
+| Spalte | Bedeutung  |
+|---|---|
+| mpg | Kraftstoffverbrauch in Meilen pro Gallone |
+| cyl | Anzahl Zylinder |
+| disp | Hubraum in Kubikzoll |
+| hp | Pferdestärken  |
+| drat | Hinterachsübersetzung |
+| wt | Gewicht in 1000 Pfund |
+| qsec | Zeit auf der Viertelmeile  |
+| vs | Motor (0 = V-Motor, 1 = Reihenmotor)  |
+| am | Schaltung (0 = Automatik, 1 = Handschaltung) |
+| gear | Anzahl der Vorwärtsgänge  |
+| carb | Anzahl der Vergaser  |
+
+Henderson and Velleman 1981. Building multiple regression models interactively. Biometrics 37: 391–411. Der Datensatz ist abrufbar auf [GitHub](https://gist.github.com/seankross/a412dfbd88b3db70b74b) und in R verfügbar.
+
+:::
+
+1. Gruppieren Sie den Datensatz nach der Anzahl Zylinder und ermitteln Sie den durchschnittlichen Kraftstoffverbrauch für jede Gruppe.
+
+2. Wie viele Liter auf 100 Kilometer sind es?
+
+3. Gruppieren Sie den Datensatz nach der Anzahl der Zylinder und der Vergaser.Welche Gruppe ist am schnellsten auf der Viertelmeile?
 
 ## Funktionen für Funktionen :-)
  pipe, apply usw.
@@ -202,7 +315,12 @@ https://pandas.pydata.org/docs/user_guide/basics.html#function-application
 
 Für die meisten Funktionen stehen Methoden zur Verfügung. --> Sehr viele --> Tipp: In der Dokumentation nachschlagen.
 
-
+```{python}
+# meerschweinchen['len'].apply(lambda x: len(str(x)))
+meerschweinchen['len'].apply("mean")
+```
 
 ## Aufgaben Operationen
-1. Wählen Sie aus dem DataFrame meerschweinchen alle Zeilen der Spalte 'dose' mit den Werten 0.5 und 2.0 aus. Vergleichen Sie nun die durchschnittliche Länge der zahnbildenden Zellen ('len') nach der Dosis und der Art der Gabe von Vitamin C (VC) bzw. Orangensaft (OJ) (Spalte 'supp'). (Code zum Einlesen der Datei siehe @lst-readfile) 
+1. Wählen Sie aus dem DataFrame temperaturen alle Zeilen der Spalte 'dose' mit den Werten 0.5 und 2.0 aus. Vergleichen Sie nun die durchschnittliche Länge der zahnbildenden Zellen ('len') nach der Dosis und der Art der Gabe von Vitamin C (VC) bzw. Orangensaft (OJ) (Spalte 'supp'). (Code zum Einlesen der Datei siehe @lst-readfile) 
+
+--> Das ist im Baustein das Beispiel
