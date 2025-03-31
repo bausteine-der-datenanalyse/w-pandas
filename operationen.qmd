@@ -1,5 +1,5 @@
 # Operationen
-Pandas erlaubt wie NumPy vektorisierte Operationen, das heißt Berechnungen mit einer Series oder einem DataFrame werden auf jedes Element angewendet. So können die Rechenoperatoren direkt verwendet werden.
+Pandas erlaubt wie NumPy vektorisierte Operationen, dass heißt, Berechnungen mit einer Series oder einem DataFrame werden auf jedes Element angewendet. So können die Rechenoperatoren direkt verwendet werden.
 
 ```{python}
 #| echo: false
@@ -57,27 +57,33 @@ print(27 * "=")
 print(temperaturen.mul(9).div(5).add(32))
 ```
 
-Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt).
+Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt). Wie NumPys `np.nan` umfasst auch Pandas einen speziellen fehlenden Wert: `pd.NA` (achten Sie auf den Datentyp der Ausgabe). Mit fehlenden Werten werden wir uns später ausführlicher beschäftigen.
 
 ```{python}
 #| warning: false
 missing_value = pd.Series([1, pd.NA, 3])
-print(missing_value.add(1, fill_value = -999))
+print(missing_value.add(1, fill_value = -999), "\n")
+print(missing_value.add(1, fill_value = np.nan), "\n")
+print(missing_value.add(1, fill_value = pd.NA))
 ```
 
 ### summarische Funktionen
 
-  - `pd.DataFrame.mean()` ermittelt den Durchschnitt jeder Spalte / Zeile.
-  - `pd.DataFrame.median()` ermittelt den Median jeder Spalte / Zeile.
-  - `pd.DataFrame.mode()` ermittelt den Modus jeder Spalte / Zeile.
-  - `pd.DataFrame.sum()` ermittelt die Summe jeder Spalte / Zeile. `pd.DataFrame.cumsum()` ermittelt die kummulierte Summe jeder Spalte / Zeile.
-  - `pd.DataFrame.min()` und `pd.DataFrame.max()` ermitteln Minimum bzw. Maximum jeder Spalte / Zeile. `pd.DataFrame.cummin()` und `pd.DataFrame.cummax()` ermittelt den kummulierten Durchschnitt jeder Spalte / Zeile.
+  - `pd.DataFrame.mean()` ermittelt den Durchschnitt.
+  - `pd.DataFrame.median()` ermittelt den Median.
+  - `pd.DataFrame.mode()` ermittelt den Modus.
+  - `pd.DataFrame.sum()` ermittelt die Summe.
+  - `pd.DataFrame.cumsum()` ermittelt die kummulierte Summe.
+  - `pd.DataFrame.min()` und `pd.DataFrame.max()` ermitteln Minimum bzw. Maximum.
+  - `pd.DataFrame.cummin()` und `pd.DataFrame.cummax()` ermittelt das kummulierte Minimum bzw. Maximum.
 
 ```{python}
+# spaltenweise
 print("Mittlere Jahrestemperaturen")
 print(27 * "=")
 print(temperaturen.mean(), "\n")
 
+# zeilenweise
 print("Monatliche Mindesttemperatur")
 print(28 * "=")
 print(temperaturen.min(axis = 1))
@@ -88,6 +94,7 @@ Pandas bietet wie die Pythonbasis verschiedene boolsche Funktionen.
 
 `pd.DataFrame.isin(values)` prüft für jedes Element des DataFrame, ob dieses in `values` enthalten ist. Mit dem Operator `~` kann geprüft werden, ob die Elemente eines DataFrame nicht in `values` enthalten sind: `~pd.DataFrame.isin(values)`.  
   Die Funktionsausführung ist abhängig vom Datentyp des in `values` übergebenen Objekts.
+
   - Wenn `values` eine Liste oder ein NumPy-Array ist, ist das Ergebnis True, wenn es eine Übereinstimmung mit einem der enthaltenen Elemente gibt.
   - Ist `value` eine Series oder ein DataFrame, wird die Übereinstimmung positionsbasiert überprüft (siehe Beispiel).
 
@@ -96,7 +103,7 @@ Pandas bietet wie die Pythonbasis verschiedene boolsche Funktionen.
 
 :::: {.panel-tabset}
 ## Einzelwerte oder Liste
-für Einzelwerte oder eine Liste wird die Übereinstimmung elementweise überprüft.
+Für Einzelwerte oder eine Liste wird die Übereinstimmung elementweise überprüft.
 ```{python}
 print(temperaturen, "\n")
 
@@ -145,7 +152,7 @@ print(temperaturen.isin(temperaturen_2021_df), "\n")
 
 Eine klassenabhängige Funktionsausführung kann, wenn das Verhalten unbemerkt bleibt, die Ergebnisse einer Datenanalyse verfälschen. Um dies zu verhindern, sollten Sie 3 allgemeine Ratschläge befolgen:
 
-1. Schauen Sie in die Dokumentation der jeweiligen Funktion. Python und viele Module entwickeln sich dynamisch, sodass auch eine bereits bekannte Funktion ein neues Verhalten aufweisen kann.
+1. Schauen Sie in die Dokumentation der jeweiligen Funktion. Python und viele Module entwickeln sich dynamisch, sodass sich das Verhalten einer Funktion verändern kann.
 
 2. Gehen Sie schrittweise vor und lassen sich die Zwischenergebnisse von Arbeitsschritten mit der Funktion `print()` ausgeben.
 
@@ -163,10 +170,104 @@ Eine Gruppe von Funktionen setzt logische Vergleiche um.
 | `pd.DataFrame.ge(other)` | größer gleich |
 | `pd.DataFrame.gt(other)` | größer |
 
-### Verwendung von DF.agg() und DF.apply()
-Pandas bringt zwei eigene Methoden mit, um Operationen zeilen- oder spaltenweise auszuführen. 
+```{python}
+print(temperaturen.le(2), "\n")
+print(temperaturen[2021].gt(5))
+```
 
-Die Pandas-Methode `DataFrame.agg()` aggregiert einen DataFrame zeilen- oder spaltenweise durch eine spezifizierbare Funktion. Die Pandas-Methode `DF.apply()` wendet eine Funktion zeilen- oder spaltenweise auf einen DataFrame an. Die Methoden machen also das selbe. Details zur Verwendung des [Lambda-Ausdrucks](https://docs.python.org/3/reference/expressions.html#lambda) und der Methode `join` aus der [Pythonbasis](https://www.w3schools.com/python/ref_string_join.asp) finden Sie in den angegebenen Links.
+### Verwendung der Methoden .agg() und .apply()
+Pandas bringt zwei eigene Methoden mit, um Operationen zeilen- oder spaltenweise auszuführen. `DataFrame.agg()` (oder auch `DataFrame.aggregate()`) aggregiert einen DataFrame zeilen- oder spaltenweise durch eine Funktion. Die Pandas-Methode `DF.apply()` wendet eine Funktion zeilen- oder spaltenweise auf einen DataFrame an. Die Methoden sind also sehr ähnlich und führen in den meisten Fällen zum selben Ergebnis.
+
+Beide Funktionen führen mit dem Argument `axis = 1` Operationen zeilenweise aus.
+
+::: {.panel-tabset}
+
+## Funktion
+```{python}
+def my_plus_ten(x):
+  y = x + 10
+  return y
+
+print(temperaturen.agg(my_plus_ten), "\n")
+print(temperaturen.apply(my_plus_ten))
+```
+
+## Funktionsname
+```{python}
+print(temperaturen.agg("sum"), "\n")
+print(temperaturen.apply("sum"))
+```
+
+## Liste von Funktionen
+```{python}
+print(temperaturen.agg(["sum", "mean", "median"]), "\n")
+print(temperaturen.apply(["sum", "mean", "median"]))
+```
+
+## Dictionary von Funktionen
+```{python}
+print(temperaturen.agg({2021: "sum", 2022: "mean", 2023: "median", 2024: "min"}), "\n")
+print(temperaturen.apply({2021: "sum", 2022: "mean", 2023: "median", 2024: "min"}), "\n")
+```
+
+:::
+
+Besonders nützlich ist die Möglichkeit, Funktionen, die normalerweise auf eine Series angewendet werden, auf jedes Element der Series anzuwenden. Dafür wird die lambda Syntax verwendet: `lambda x: x + 1` . lambda ist ein Platzhalter und kann als "für jedes x tue:" gelesen werden. So kann beispielsweise die Anzahl der Zeichen in jeder Zeile bestimmt werden.
+
+```{python}
+#| warning: false
+
+# Auf die Series angewendet
+print(len(str(temperaturen[2021])), "\n")
+
+# Elementweise angewendet
+print(temperaturen[2021].agg(lambda x: len(str(x))), "\n") # deprecated
+print(temperaturen[2021].apply(lambda x: len(str(x))), "\n")
+
+```
+
+Details zur Verwendung des [Lambda-Ausdrucks](https://docs.python.org/3/reference/expressions.html#lambda) finden Sie in der Dokumentation. 
+
+Der Vollständigkeit wegen ist zu erwähnen, dass mit den Methoden `.map()` und `.transform()` weitere, sehr ähnliche Alternativen bestehen. Bei Interesse können Sie die Unterschiede [in diesem Artikel](https://towardsdatascience.com/pandas-apply-map-or-transform-dd931659e9cf/) nachlesen.
+
+```{python}
+# print(temperaturen[2021].map(lambda x: len(str(x))))
+# print(temperaturen[2021].transform(lambda x: len(str(x))), "\n") 
+```
+
+
+## Aufgaben Operationen
+1. Bestimmen Sie für den Dataframe temperaturen die monatliche Mediantemperatur.
+
+2. Ermitteln Sie die Monate mit einer Mediantemperatur größer gleich 21 Grad.
+
+3. Geben Sie die Indexbeschriftung dieser Monate aus.
+
+::: {#tip-loesungoperationen .callout-tip collapse="true"}
+## Musterlösung Aufgaben Operationen
+
+1. Aufgabe 
+
+```{python}
+print(temperaturen.mean(axis = 1))
+```
+
+2. Aufgabe 
+
+```{python}
+print(temperaturen.mean(axis = 1).ge(21))
+```
+
+3. Aufgabe 
+
+```{python}
+print(temperaturen.index[temperaturen.mean(axis = 1).ge(21)], "\n")
+
+# als Liste
+print(list(temperaturen.index[temperaturen.mean(axis = 1).ge(21)]), "\n")
+```
+
+:::
 
 ## Suchen und ersetzen
 Um die Indexposition eines bestimmten Werts zu bestimmen, kann die Numpy-Funktion `np.where()` verwendet werden. Diese gibt zwei Arrays mit den jeweiligen Zeilen- und Spaltennummern zurück.
@@ -195,7 +296,28 @@ print(temperaturen.where(temperaturen == 25, other = 1000))
 ```
 
 ## Aufgaben suchen und ersetzen
-**to do**
+1. Bestimmen Sie die Position der Werte im DataFrame 'temperaturen', die kleiner als 0 sind und geben Sie die Werte aus.
+
+2. Ersetzen Sie alle Werte im DataFrame temperaturen, die kleiner sind als 0 durch den Wert 0 und geben Sie das Ergebnis aus.
+
+::: {#tip-loesung-suchenersetzen .callout-tip collapse="true"}
+## Musterlösung suchen und ersetzen
+
+1. Aufgabe
+```{python}
+print(np.where(temperaturen <= 0))
+print("Anzahl Werte:", len(np.where(temperaturen <= 0)[0]))
+
+for i in range(len(np.where(temperaturen <= 0)[0])):
+  print(temperaturen.iloc[np.where(temperaturen <= 0)[0][i], np.where(temperaturen <= 0)[1][i]])
+```
+
+2. Aufgabe
+```{python}
+print(temperaturen.where(temperaturen > 0, other = 0))
+```
+
+:::
 
 ## Sortieren
 Die Methode `DataFrame.sort_index(axis = 0, ascending = True, inplace = False)` sortiert entlang einer Achse, standardmäßig aufsteigend nach dem Index. Durch die Übergabe des Arguments `axis = 1` werden die Spalten sortiert. Mit dem Argument `ascending = False` wird absteigend sortiert. Das Argument `inplace = True` sorgt, wie gewohnt, dafür, dass das Ergebnis des Sortiervorgangs direkt im Objekt gespeichert wird.
@@ -223,7 +345,32 @@ except Exception as error:
 ```
 
 ## Aufgaben Sortieren
-**to do**
+1. Sortieren Sie den DataFrame meerschweinchen absteigend nach der Zahnlänge ('len'). Welches Meerschweinchen hat die längste zahnbildende Zelle (gesucht ist die ID)?
+
+2. Welches Meerschweinchen, welches die Dosis 1.0 erhielt, hat die längste zahnbildende Zelle (gesucht ist die ID)?
+
+::: {#tip-musterloesungsortieren .callout-tip collapse = "true"}
+## Musterlösung Sortieren
+
+1. Aufgabe
+```{python}
+print(meerschweinchen.sort_values(by = 'len', ascending = False).head(), "\n")
+
+print("Die ID lautet:", meerschweinchen.sort_values(by = 'len', ascending = False).iloc[0, 0])
+```
+
+2. Aufgabe
+
+```{python}
+dose_1 = meerschweinchen[meerschweinchen['dose'] == 1.0]
+
+print(dose_1.sort_values(by = 'len', ascending = False).head(), "\n")
+
+print("Die ID lautet:", dose_1.sort_values(by = 'len', ascending = False).iloc[0, 0])
+
+```
+
+:::
 
 ## GroupBy
 Die Methode `pd.groupby()` teilt einen DataFrame (oder eine Series) in Gruppen auf und gibt ein GroupBy-Objekt zurück. Das GroupBy-Objekt hat dieselben Spalten- und Zeilenbeschriftungen, wie der DataFrame, das GroupBy-Objekt ist aber nach der Gruppenaufteilung sortiert. Operationen, die auf das GroupBy-Objekt angewendet werden, werden für jede Gruppe separat ausgeführt. 
@@ -300,27 +447,45 @@ mtcars.head()
 | carb | Anzahl der Vergaser  |
 
 Henderson and Velleman 1981. Building multiple regression models interactively. Biometrics 37: 391–411. Der Datensatz ist abrufbar auf [GitHub](https://gist.github.com/seankross/a412dfbd88b3db70b74b) und in R verfügbar.
-
 :::
+
+&nbsp;
 
 1. Gruppieren Sie den Datensatz nach der Anzahl Zylinder und ermitteln Sie den durchschnittlichen Kraftstoffverbrauch für jede Gruppe.
 
 2. Wie viele Liter auf 100 Kilometer sind es?
 
-3. Gruppieren Sie den Datensatz nach der Anzahl der Zylinder und der Vergaser.Welche Gruppe ist am schnellsten auf der Viertelmeile?
+3. Gruppieren Sie den Datensatz nach der Anzahl der Zylinder und der Vergaser. Welche Gruppe ist am schnellsten auf der Viertelmeile?
 
-## Funktionen für Funktionen :-)
- pipe, apply usw.
-https://pandas.pydata.org/docs/user_guide/basics.html#function-application
+::: {#tip-loesunggroupby .callout-tip collapse="true"}
+## Musterlösung GroupBy
 
-Für die meisten Funktionen stehen Methoden zur Verfügung. --> Sehr viele --> Tipp: In der Dokumentation nachschlagen.
+1. Aufgabe
 
 ```{python}
-# meerschweinchen['len'].apply(lambda x: len(str(x)))
-meerschweinchen['len'].apply("mean")
+mtcars.groupby(by = 'cyl')['mpg'].mean() 
 ```
 
-## Aufgaben Operationen
-1. Wählen Sie aus dem DataFrame temperaturen alle Zeilen der Spalte 'dose' mit den Werten 0.5 und 2.0 aus. Vergleichen Sie nun die durchschnittliche Länge der zahnbildenden Zellen ('len') nach der Dosis und der Art der Gabe von Vitamin C (VC) bzw. Orangensaft (OJ) (Spalte 'supp'). (Code zum Einlesen der Datei siehe @lst-readfile) 
+2. Aufgabe
 
---> Das ist im Baustein das Beispiel
+```{python}
+# 1 Meile = 1.60934 Kilometer
+# 1 Gallone = 3.78541 Liter
+
+mpg = mtcars.groupby(by = 'cyl')['mpg'].mean()
+
+liter_100km = 1 / mpg.mul(1.60934).div(3.78541).div(100)
+
+print(liter_100km)
+```
+
+3. Aufgabe
+
+```{python}
+print(mtcars.groupby(by = ['cyl', 'carb'])['qsec'].mean(), "\n")
+print(mtcars.groupby(by = ['cyl', 'carb'])['qsec'].mean().index[-1], "\n")
+```
+
+Die Gruppe mit 8 Zylindern und 8 Vergasern ist am schnellsten. (Hinweis: Es handelt sich hierbei um einen sogenannten [MultiIndex](https://pandas.pydata.org/docs/user_guide/advanced.html).)
+
+:::

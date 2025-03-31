@@ -18,6 +18,7 @@ book:
     - index.qmd
     - einleitung.qmd
     - operationen.qmd
+    - plotting.qmd
 
 
   sidebar:
