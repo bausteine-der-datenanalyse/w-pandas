@@ -1,0 +1,103 @@
+# Datentypen
+**An MF: Das Kapitel behandelt zu 80 Prozent NumPy... das kann man eventuell aufteilen.**
+
+Das Modul Pandas ist auf den Umgang mit unterschiedlichen Datentypen spezialisiert. Ein Dataframe kann unterschiedliche Datentypen enthalten (bspw. Zahlen und Wahrheitswerte).
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+```
+
+NumPy unterstützt folgende Datentypen:
+
+|      Datentyp NumPy-Array  |      Datentyp in Python |
+|---|---|
+|     int_    |     int    |
+|     double    |     float    |
+|     cdouble    |     complex    |
+|     bytes_    |     bytes    |
+|     str_    |     str    |
+|     bool_    |     bool    |
+|     datetime64    |     datetime.datetime    |
+|     timedelta64    |     datetime.timedelta    |
+
+&nbsp;
+
+Die NumPy-Datentypen haben betriebssystemabhängige Synonyme. Beispielsweise wird für ein Array vom Datentyp `int_` der Datentyp `int` ausgegeben, für ein Array aus Gleitkommazahlen der Datentyp `float64`. 
+
+```{python}
+skalar = np.array([2])
+print(skalar.dtype, "\n")
+
+skalar = np.array([2.1])
+
+print(skalar.dtype)
+```
+
+Außerdem gibt es für jeden NumPy-Datentyp ein Kürzel, das aus einem einzigen Buchstaben besteht. Beispielsweise wird für Zeichenfolgen das Kürzel `U` für Unicode-Zeichen und die Anzahl der Stellen ausgegeben (Für alle anderen Datentypen repräsentiert die Zahl die Anzahl der Bytes, die im Speicher benötigt werden.). Der Ausgabe ist ein Zeichen zur Kodiererung der [Byte-Reihenfolge](https://de.wikipedia.org/wiki/Byte-Reihenfolge) im Speicher vorangestellt '>' (big-endian), '<' (little-endian) oder '=' (Systemstandard).
+
+```{python}
+skalar = np.array(['2'])
+print(skalar.dtype, "\n")
+
+skalar = np.array(['2.1'])
+print(skalar.dtype, "\n")
+
+# Ein Datentyp mit mehr Speicherplatzbedarf kann zugewiesen werden
+skalar = np.array([2], dtype = 'U3')
+print(skalar.dtype)
+```
+
+Alle Synonyme und Kürzel können Sie der [NumPy-Dokumentation](https://numpy.org/devdocs/reference/arrays.scalars.html) entnehmen.
+
+Häufig verwendet das Modul Pandas die NumPy-Datentypen. Pandas führt aber auch einige zusätzliche Datentypen ein. Eine vollständige Liste finden Sie in der [Pandas Dokumentation](https://pandas.pydata.org/docs/reference/arrays.html). Die wichtigsten zusätzlichen Datentypen sind:
+
+  - [Kategorie](https://pandas.pydata.org/docs/user_guide/categorical.html) `dtype = 'category'` für kategoriale, also ungeordnete, Daten.
+
+  - [Zeitzonenbewusstes Datumsformat](https://pandas.pydata.org/docs/reference/api/pandas.Timestamp.html#pandas.Timestamp) `dtype = 'datetime64[ns, US/Eastern]'`
+
+  - Erweiterungen der NumPy-Datentypen mit Unterstützung fehlender Werte. Diese sind an der Großschreibung zu erkennen.
+
+```{python}
+# NumPy-Datentyp int
+series = pd.Series([1, 2, 3], dtype = 'int')
+print(series, "\n")
+
+# NumPy-Datentyp int unterstützt fehlende Werte nicht
+try:
+  series = pd.Series([1, 2, 3, np.nan], dtype = 'int')
+except Exception as error:
+    print(error, "\n")
+
+# Pandas-Datentyp Int64 unterstützt fehlende Werte
+series = pd.Series([1, 2, 3, np.nan], dtype = 'Int64')
+print(series)
+
+```
+
+
+::: {#wrn-string .callout-warning appearance="simple" collapse="false"}
+## Pandas-Datentyp string
+Pandas nutzt wie die Pythonbasis den Datentyp 'string', der unveränderlich (immutable) ist. Das bedeutet, es gibt keine Methode, die eine angelegte Zeichenkette verändern kann. Operationen mit diesem Datentyp geben ein neues Objekt mit dem Datentyp 'string' zurück.
+
+Die Übergabe des Datentyps 'str' führt zur Verwendung des NumPy-Datentyps string (dtype = 'str'), der veränderlich (mutable) ist.
+
+Je nach Situation kann die Verwendung des einen oder des anderen Datentyps nützlich sein. Beispielsweise kann der NumPy-Datentyp 'str' mit der Methode `pd.Series.sum()` verkettet werden.
+
+```{python}
+# mit NumPy-Datentyp 'str'
+string_series = pd.Series(['H', 'a', 'l', 'l', 'o', '!'], dtype = 'str')
+print(f"Mit NumPy-Datentyp 'str': {string_series.sum()}")
+
+# mit Pandas-Datentyp 'string'
+try:
+  string_series.astype('string').sum()
+except Exception as error:
+  print("\nMit Pandas-Datentyp 'string':")
+  print(error)
+
+```
+
+:::

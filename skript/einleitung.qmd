@@ -1,16 +1,11 @@
 # Einleitung
-
-Das Modul Pandas wurde für die Arbeit mit strukturierten Daten konzipiert. Wie NumPy erlaubt Pandas vektorisierte Operationen, ohne mit Hilfe einer Schleife jedes Element eines Sammeltyps durchlaufen zu müssen. Pandas erleichtert die Analyse insbesondere von in Tabellenform vorliegenden Daten, da es mit dem DataFrame eine leicht zu benutzende Struktur für die Verarbeitung unterschiedlicher Datentypen und fehlenden Werten bietet. Pandas integriert darüber hinaus Funktionalitäten anderer Module und bietet unter anderem einen einheitlichen Zugang zu:
+Das Modul Pandas wurde für die Arbeit mit strukturierten Daten konzipiert. Pandas erleichtert die Analyse insbesondere von in Tabellenform vorliegenden Daten, da es mit dem DataFrame eine leicht zu benutzende Struktur für die Verarbeitung unterschiedlicher Datentypen und fehlenden Werten bietet. Wie NumPy erlaubt Pandas vektorisierte Operationen, ohne mit Hilfe einer Schleife jedes Element eines Sammeltyps durchlaufen zu müssen. Pandas integriert darüber hinaus Funktionalitäten anderer Module und bietet unter anderem einen einheitlichen Zugang zu:
 
   - Datumsinformationen und Zeitreihen
-  - Zufallszahlen
   - Grafikerstellung
   - Einlesen von Dateien
 
 Das Modul Pandas wird mit dem Befehl `import pandas` geladen. Als Kürzel hat sich pd etabliert. Da Pandas auf dem Modul NumPy aufbaut, werden häufig beide Module geladen. Viele Funktionen und Methoden von NumPy und Pandas sind miteinander kompatibel.
-
-**wird NumPy in diesem Baustein überhaupt benutzt?!**  
---> ja unter Operationen, um die Indizes von Werten zu finden.
 
 ```{python}
 import numpy as np
@@ -28,7 +23,7 @@ Beide Datenstrukturen verfügen über einen Index, der in der Ausgabe angezeigt 
 ```{python}
 #| echo: false
 
-print(f"Der Index beginnt wie in der Pythonbasis bei 0.\n{pd.Series(['Frühschicht', 'Frühschicht', 'Spätschicht'],dtype = 'string')}")
+print(f"Der Index beginnt wie in der Pythonbasis bei 0.\n{pd.Series(['Frühschicht', 'Frühschicht', 'Spätschicht'], dtype = 'string')}")
 ```
 
 Der Index ist standardmäßig numerisch, kann aber mit beliebigen Werten versehen werden.
@@ -69,7 +64,7 @@ numerische_series = pd.Series([1, 2, 3], dtype = 'float', index = ['A1', 'B2', '
 print(numerische_series)
 ```
 
-Für eine bestehende Series können Name und Index über entsprechende Attribute aufgerufen und geändert werden. Um den Datentyp zu ändern, wird die Methode `pd.Series.astype()` verwendet.
+Für eine bestehende Series können Name und Index über entsprechende Attribute aufgerufen und geändert werden. Um den Datentyp zu ändern, wird die Methode `pd.Series.astype()` verwendet. Eine Übersicht der in Pandas verfügbaren Datentypen finden Sie in der [Pandas-Dokumentation](https://pandas.pydata.org/docs/user_guide/basics.html#dtypes).
 
 ```{python}
 print(f"Name der Series: {numerische_series.name}")
@@ -82,7 +77,8 @@ numerische_series = numerische_series.astype('string')
 print(f"\nDie geänderte Series:\n{numerische_series}")
 ```
 
-Die Series 'numerische_series' hat nun den Datentyp string, der Name des Objekts ist also nicht mehr selbsterklärend. **Ändern Sie den Datentyp des Objekts in Ganzzahl und wählen Sie einen passenden Namen für die Series aus.** Eine Übersicht der in Pandas verfügbaren Datentypen finden Sie in der [Pandas-Dokumentation](https://pandas.pydata.org/docs/user_guide/basics.html#basics-dtypes).
+### Aufgabe Series
+Ändern Sie den Datentyp des Objekts 'numerische_series' in Ganzzahl und wählen Sie einen neuen Namen für die Series aus.
 
 ::: {#tip-dtype .callout-tip collapse="true"}
 ## Musterlösung dtype
@@ -92,30 +88,6 @@ numerische_series = numerische_series.astype('float')
 numerische_series = numerische_series.astype('int')
 
 print(numerische_series)
-```
-
-:::
-
-::: {#wrn-string .callout-warning appearance="simple" collapse="true"}
-## Pandas-Datentyp string
-Pandas nutzt wie die Pythonbasis den Datentyp 'string', der unveränderlich (immutable) ist. Das bedeutet, es gibt keine Methode, die eine angelegte Zeichenkette verändern kann. Operationen mit diesem Datentyp geben ein neues Objekt mit dem Datentyp 'string' zurück.
-
-Die Übergabe des Datentyps 'str' führt zur Verwendung des NumPy-Datentyps string (dtype = 'str'), der veränderlich (mutable) ist.
-
-Je nach Situation kann die Verwendung des einen oder des anderen Datentyps nützlich sein. Beispielsweise kann der NumPy-Datentyp 'str' mit der Methode `pd.Series.sum()` verkettet werden.
-
-```{python}
-# mit NumPy-Datentyp 'str'
-string_series = pd.Series(['H', 'a', 'l', 'l', 'o', '!'], dtype = 'str')
-print(f"Mit NumPy-Datentyp 'str': {string_series.sum()}")
-
-# mit Pandas-Datentyp 'string'
-try:
-  string_series.astype('string').sum()
-except Exception as error:
-  print("\nMit Pandas-Datentyp 'string':")
-  print(error)
-
 ```
 
 :::
@@ -140,7 +112,7 @@ print(df_aus_verschieden)
 
 Beim Anlegen eines DataFrames können ebenfalls verschiedene Parameter übergeben werden:
 
-  - `pd.DataFrame(data, dtype = 'float')` legt den Datentyp des DataFrames für alle Werte fest. Wird der Parameter nicht übergeben, wählt Pandas einen passenden Datentyp aus.
+  - `pd.DataFrame(data, dtype = 'float')` legt den Datentyp des DataFrames für alle Werte fest. Wird der Parameter nicht übergeben, wählt Pandas einen passenden Datentyp für jede Spalte aus.
 
   - `pd.DataFrame(data, index = ['A1', 'B2', 'C3'])` übergibt Werte für den Index.
 
@@ -177,6 +149,19 @@ df = pd.DataFrame({'Spalte 1': [1, 2, 3], 'Spalte 2': [4.1, 5.6, 6.0]}, index = 
 print(df)
 ```
 
+Außerdem kann ein DataFrame durch Zuweisung von Daten erweitert werden.
+
+```{python}
+# einen leeren DataFrame erzeugen
+df = pd.DataFrame()
+
+# Zuweisung von Daten
+df['Spaltenbeschriftung'] = [1, 2, 3]
+df['zweite Spalte'] = alphanumerische_series
+
+print(df)
+```
+
 ::: {#tip-index .callout-tip collapse="false"}
 ## Der Index
 
@@ -187,8 +172,6 @@ Auch widerspricht das Auslagern beschreibender oder gemessener Variablen in den 
 :::
 
 Bestehende DataFrames können ähnlich wie Series modifiziert werden. Um den Datentyp einer oder mehrerer Spalten zu ändern, wird die Methode `pd.DataFrame.astype()` verwendet.
-
-Eine Spalte kann neu angelegt werden. In diesem Beispiel ordnet Pandas Spalte 1 den unspezifischen Datenyp object zu. Die Spalte kann wie eine Series neu angelegt werden.
 
 ``` {python}
 df = pd.DataFrame({'Spalte 1': ['1', '2', '3'], 'Spalte 2': [True, False, True]})
@@ -213,7 +196,7 @@ df = df.astype({'Spalte 1': 'int', 'Spalte 2': 'bool'})
 print(f"\nDie Datentypen von df:\n{df.dtypes}")
 ```
 
-Spaltennamen und Index eines bestehenden `DataFrame` können über entsprechende Attribute oder Methoden verändert werden. Die Spaltennamen können über das Attribut `pd.DataFrame.columns` geändert werden. Dabei muss die Länge der Liste der Spaltenanzahl entsprechen. Der Index kann über das Attribut `pd.DataFrame.index` geändert werden. Dabei muss die Länge der Liste der Anzahl Zeilen entsprechen. 
+Spaltennamen und Index eines bestehenden `DataFrame` können über entsprechende Attribute oder Methoden verändert werden. Die Spaltennamen können über das Attribut `pd.DataFrame.columns` geändert werden. Dabei wird eine Liste übergeben, deren Länge der Spaltenanzahl entsprechen muss. Der Index kann über das Attribut `pd.DataFrame.index` geändert werden, indem eine Liste zugewiesen wird. Dabei muss die Länge der Liste der Anzahl Zeilen entsprechen. 
 
 ```{python}
 # ändern der Spaltennamen über das Attribut .columns
@@ -222,7 +205,7 @@ df.index = [1, 2, 3]
 print(df)
 ```
 
-Mit der Methode `pd.DataFrame.rename(columns = {"alt1": "neu1", "alt2": "neu2"}, index = {"alt1": "neu1", "alt2": "neu2"}, inplace = True)` können Spalten- und Zeilenbeschriftungen in Form eines Dictionarys übergeben werden. Auf diese Weise können alle oder ausgewählte Beschriftungen geändert werden. Durch den Parameter `inplace = True` erfolgt die Zuweisung direkt ohne Neuzuweisung des Objekts.
+Mit der Methode `pd.DataFrame.rename(columns = {"alt1": "neu1", "alt2": "neu2"}, index = {"alt1": "neu1", "alt2": "neu2"}, inplace = True)` können Spalten- und Zeilenbeschriftungen in Form eines Dictionarys übergeben werden. Auf diese Weise können alle oder ausgewählte Beschriftungen geändert werden. Durch das Argument `inplace = True` erfolgt die Zuweisung direkt ohne Neuzuweisung des Objekts.
 
 ```{python}
 df.rename(columns = {'Spalte1': 'Spalte_1', 'Spalte2': 'Spalte_2'}, index = {1: 'A1', 2: 'B2', 3: 'C3'}, inplace = True)
@@ -236,8 +219,34 @@ df.reset_index(inplace = True, drop = True)
 print(df)
 ```
 
+### Aufgabe DataFrame
+Erstellen Sie einen DataFrame.
+  
+  - Die erste Spalte soll die Zahlen von 1 bis 12 enthalten und mit 'Nummer' beschriftet werden. Die zweite Spalte soll die Monatsnamen des Jahres enthalten und mit 'Monat' beschriftet werden.
+  - Fügen Sie nachträglich die Series 'ferien' als dritte Spalte mit der Spaltenbeschriftung 'Ferien' ein.  
+  `ferien = [False, False, False, True, False, True, True, True, False, True, False, True]`
+
+::: {#tip-musterloesungdataframe .callout-tip collapse="true"}
+## Musterlösung
+
+```{python}
+
+ferien = [False, False, False, True, False, True, True, True, False, True, False, True]
+
+df = pd.DataFrame({
+  'Nummer': list(range(1,13)),
+  'Monat': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+})
+
+df['Ferien'] = ferien
+
+print(df)
+```
+
+:::
+
 ## Deskriptive Datenanalyse mit Pandas
-**Notiz: Der Teil ist zu großen Teilen auch im m-EsD enthalten --> eine Dopplung wäre okay, ein Querverweis kann aber auch ergänzt werden.**  
+**Dieser Teil ist zu großen Teilen auch im m-EsD enthalten --> eine Dopplung wäre okay, ein Querverweis kann aber auch ergänzt werden.**  
 
 Pandas bietet einige praktische Funktionen, um den Aufbau eines Datensatzes und die enthaltenen Daten zu beschreiben. Als Beispieldatensatz dienen Daten zur Länge zahnbildender Zellen bei Meerschweinchen, die Vitamin C direkt (VC) oder in Form von Orangensaft (OJ) in unterschiedlichen Dosen erhielten.
 
@@ -247,7 +256,7 @@ Pandas bietet einige praktische Funktionen, um den Aufbau eines Datensatzes und 
 ```{python}
 
 
-dateipfad = "skript/01-daten/ToothGrowth.csv"
+dateipfad = "01-daten/ToothGrowth.csv"
 meerschweinchen = pd.read_csv(filepath_or_buffer = dateipfad, sep = ',', header = 0, \
   names = ['ID', 'len', 'supp', 'dose'], dtype = {'ID': 'int', 'len': 'float', 'dose': 'float', 'supp': 'category'})
 ```
@@ -255,6 +264,8 @@ meerschweinchen = pd.read_csv(filepath_or_buffer = dateipfad, sep = ',', header 
 :::::
 
 Crampton, E. W. 1947. „THE GROWTH OF THE ODONTOBLASTS OF THE INCISOR TOOTH AS A CRITERION OF THE VITAMIN C INTAKE OF THE GUINEA PIG“. The Journal of Nutrition 33 (5): 491–504. <https://doi.org/10.1093/jn/33.5.491> 
+
+Der Datensatz kann in R mit dem Befehl "ToothGrowth" aufgerufen werden.
 ::::
 
 &nbsp;
@@ -314,14 +325,14 @@ meerschweinchen['dose'].unique()
 **Hinweis: dieser Abschnitt kommt ähnlich auch im m-EsD vor.**
 
 ::: {.border}
-![zweidimensionaler Datensatz](skript/00-bilder/zweidimensionaler-datensatz-slicing-mf-mp.png){width="45%" fig-alt="Dargestellt ist ein zweidimensionaler Block, der einen zweidimensionalen Datensatz repräsentiert. Pfeile repräsentieren die zwei Achsen. Die nullte Achse entspricht der Länge (von oben nach unten) und die erste Achse der Breite des Datensatzes."}
+![zweidimensionaler Datensatz](00-bilder/zweidimensionaler-datensatz-slicing-mf-mp.png){width="45%" fig-alt="Dargestellt ist ein zweidimensionaler Block, der einen zweidimensionalen Datensatz repräsentiert. Pfeile repräsentieren die zwei Achsen. Die nullte Achse entspricht der Länge (von oben nach unten) und die erste Achse der Breite des Datensatzes."}
 
 slicing von Marc Fehr ist lizensiert unter [CC-BY-4.0](https://github.com/bausteine-der-datenanalyse/w-python-numpy-grundlagen#CC-BY-4.0-1-ov-file) und abrufbar auf [GitHub](https://github.com/bausteine-der-datenanalyse/w-python-numpy-grundlagen). Die Grafik wurde auf den gezeigten Teil beschnitten und die obenstehende Beschriftung entfernt. 2024
 :::
 
 &nbsp;
 
-Pandas bringt eigene Werkzeuge für die Auswahl von Indexbereichen mit. Der aus der Pythonbasis bekannt Slice Operator wird deshalb nur kurz vorgestellt.
+Pandas bringt eigene Werkzeuge für die Auswahl von Indexbereichen mit. Der Slice Operator aus der Pythonbasis wird deshalb nur kurz vorgestellt.
 
 ### Slice Operator
 Mit dem Slice Operator können wie bei einer Liste Indexbereiche aus einer Series ausgewählt werden.
@@ -369,12 +380,17 @@ Für das Slicing von Series und DataFrames werden in Pandas die Methoden `.iloc[
 
   - `.iloc[]` arbeitet mit Ganzzahlen, akzeptiert aber auch ein boolsches Array.
 
-Für das Slicing von Series wird eine Bereichsangabe übergeben, bspw. `pd.Series.iloc[5:8]`. Für das Slicing von DataFrames werden zwei durch ein Komma getrennte Bereichsangaben übergeben, wobei an erster Stelle die Zeilen und an zweiter Stelle die Spalten ausgewählt werden, bspw. `pd.Series.iloc[5, 2:4]`. Um alle Zeilen oder Spalten auszuwählen kann der Doppelpunkt verwendet werden, etwa `pd.Series.iloc[5, :]`.
+Für das Slicing von Series wird eine Bereichsangabe übergeben, bspw. `pd.Series.iloc[5:8]`. Für das Slicing von DataFrames werden zwei durch ein Komma getrennte Bereichsangaben übergeben, wobei an erster Stelle die Zeilen und an zweiter Stelle die Spalten ausgewählt werden, bspw. `pd.DataFrame.iloc[5, 2:4]`. Um alle Zeilen oder Spalten auszuwählen kann der Doppelpunkt verwendet werden, etwa `pd.DataFrame.iloc[5, :]`.
 
 #### Beschriftungsbasiertes Slicing mit .loc[]
 
-Für eine Series interpretiert `.loc` übergebene Zeichen als Indexbeschriftung. Buchstaben und andere Zeichen werden wie strings in Anführungszeichen übergeben, bspw. `.loc['e']`, Zahlen ohne Anführungszeichen. Neben Einzelwerten ('a' oder 0) können Listen oder Arrays (['a', 'b', 'c'] oder [1, 2, 3]) und Slices übergeben werden ('a':'c' oder 0:2). Das Slicing mit einem Einzelwert führt zur Rückgabe eines Einzelwerts (sog. Skalar).  
-**Anders als die Pythonbasis und das Slicing mit .iloc[] zählt Pandas beim beschriftungsbasiertem Slicing inklusiv, gibt also die letzte ausgewählte Position mit aus.**
+Für eine Series interpretiert `.loc` übergebene Zeichen als Indexbeschriftung. Buchstaben und andere Zeichen werden wie strings in Anführungszeichen übergeben, bspw. `.loc['e']`, Zahlen ohne Anführungszeichen. Neben Einzelwerten (`'a'` oder `0`) können Listen oder Arrays (`['a', 'b', 'c']` oder `[1, 2, 3]`) und Slices übergeben werden (`'a':'c'` oder `0:2`). Das Slicing mit einem Einzelwert führt zur Rückgabe eines Einzelwerts (sog. Skalar).
+
+::: {#wrn-inklusiveslicing .callout-warning appearance="simple"}
+## inklusives Slicing
+
+Anders als die Pythonbasis und das Slicing mit `.iloc[]` zählt Pandas beim beschriftungsbasiertem Slicing inklusiv, gibt also die letzte ausgewählte Position mit aus.
+:::
 
 ```{python}
 # Nummern
@@ -407,18 +423,23 @@ print(meerschweinchen.loc[18:22, ['len', 'dose']])
 ```
 
 ### Indexbasiertes Slicing mit .iloc[]
-Die Methode `.iloc[]` ermöglicht die Auswahl von Ausschnitten basierend auf Indexpositionen. Die Methode akzeptiert die gleichen Eingaben wie die Methode `.loc[]`. **Beim Slicing mit der Methode `.iloc[]` zählt Pandas wie die Pythonbasis exklusiv.**  
-Das Slicing mit Einzelwerten führt ebenfalls zur Ausgabe eines Einzelwertes
+Die Methode `.iloc[]` ermöglicht die Auswahl von Ausschnitten basierend auf Indexpositionen. Die Methode akzeptiert die gleichen Eingaben wie die Methode `.loc[]`.
+
+::: {#wrn-exklusiveslicing .callout-warning appearance="simple"}
+## exklusives Slicing
+
+Beim Slicing mit der Methode `.iloc[]` zählt Pandas wie die Pythonbasis exklusiv.
+:::
+
+Das Slicing mit Einzelwerten führt zur Ausgabe eines Einzelwertes. Die Methode akzeptiert ebenfalls eine Liste oder ein Slice.
 
 ```{python}
 print("Rückgabe eines Einzelwerts:", meerschweinchen.iloc[27, 2]) # Einzelwerte
 print(meerschweinchen.iloc[[27, 29, 52], 2:4]) # Liste und Slice
 ```
 
-Notiz: .loc, .iloc, and also [] indexing can accept a callable as indexer. See more at Selection By Callable.
-
 #### Die Methoden .head() und .tail()
-Vereinfachte Varianten des numerisches Slicings sind die Methoden `.head(n=5)` und `.tail(n=5)`, mit denen die ersten bzw. letzten n Zeilen eines DataFrame oder einer Series ausgegeben werden  können. Über den optionalen Paramenter `n` kann die Anzahl der angezeigten Zeilen gesteuert werden. Die Methoden eignen sich gut, um sich einen ersten Eindruck von einem Datensatz zu verschaffen.
+Vereinfachte Varianten des indexbasierten Slicings sind die Methoden `.head(n=5)` und `.tail(n=5)`, mit denen die ersten bzw. letzten n Zeilen eines DataFrame oder einer Series ausgegeben werden  können. Über den optionalen Paramenter `n` kann die Anzahl der angezeigten Zeilen gesteuert werden. Die Methoden eignen sich gut, um sich einen ersten Eindruck von einem Datensatz zu verschaffen.
 
 ```{python}
 print(meerschweinchen.head(3), "\n")
@@ -432,7 +453,7 @@ print(meerschweinchen['len'].tail(3))
 ```
 
 ## Aufgaben Slicing
-1. Gegeben ist eine Pandas Series 'temperaturen_2021' mit den durchschnittlichen Monatstemperaturen.
+1. Gegeben ist eine Pandas Series 'temperaturen_2021' mit den durchschnittlichen Monatstemperaturen. Wählen Sie die Temperaturen für die Frühlingsmonate (März bis Mai) aus.
 
 ```{python}
 temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5],
@@ -440,13 +461,11 @@ temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5],
                          'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])
 ```
 
-Wählen Sie die Temperaturen für die Frühlingsmonate (März bis Mai) aus.
-
 2. Wählen Sie die Temperaturen für die letzten drei Monate des Jahres einmal mit Hilfe des Slicing Operators und einmal mit Hilfe der Pandas-Methoden aus.
 
-3. Wählen Sie mit der Methode `.loc[]` die Spalte 'dose' und 'len' des DataFrame meerschweinchen aus und geben Sie die ersten 4 und die letzten 3 Zeilen aus. (Code zum Einlesen der Datei siehe @lst-readfile)  
+3. Wählen Sie mit der Methode `.loc[]` die Spalten 'dose' und 'len' des DataFrame meerschweinchen aus und geben Sie die ersten 4 und die letzten 3 Zeilen aus. (Code zum Einlesen der Datei siehe @lst-readfile)  
 
-4. Die Methoden `.loc[]` und `.iloc[]` akzepzieren auch ein boolsches Array als Eingabe. Geben Sie aus der Spalte 'dose' des DataFrame meerschweinchen alle Zeilen mit dem Wert 2.0 aus.
+4. Die Methoden `.loc[]` und `.iloc[]` akzeptieren auch ein boolsches Array als Eingabe. Geben Sie aus der Spalte 'dose' des DataFrame meerschweinchen alle Zeilen mit dem Wert 2.0 aus.
 
 ::: {#tip-dose .callout-tip collapse="true"}
 ## Musterlösung Slicing
@@ -521,20 +540,18 @@ print(temperaturen)
 ```
 
 ## Einfügen und löschen in Datenstrukturen
-Auch um Einträge zeilen- / oder spaltenweise zu ergänzen und zu löschen bringt Pandas geeignete Methoden mit.
+Der Operator `del` aus der Pythonbasis löscht Spalten aus einem DataFrame `del DataFrame['Spaltenname']`. Pandas bringt aber auch eigene Methoden mit, um Einträge zeilen- / oder spaltenweise zu ergänzen und zu löschen.
 
-  - `pd.DataFrame.drop(labels = None, axis = 0, index = None, columns = None, inplace = False)` entfernt Zeilen oder Spalten nach den mit dem Parameter `labels` als Einzelwert ('Spalte 1') oder als Liste (['Spalte 1', 'Spalte 2']) übergebenen Beschriftungen. Der Parameter `axis = 0` steuert, ob Zeilen oder Spalten (`axis = 1`) entfernt werden sollen. Die Parameter `index` und `columns` sind  alternative Möglichkeiten, Index- oder Spaltenbeschriftungen direkt zu übergeben und ersetzen die Parameter `labels` und `axis`.
-
-  - Der Operator `del` aus der Pythonbasis löscht Spalten aus einem DataFrame `del DataFrame['Spaltenname']`.
+  - `pd.DataFrame.drop(labels = None, axis = 0, index = None, columns = None, inplace = False)` entfernt Zeilen oder Spalten nach den mit dem Parameter `labels` als Einzelwert (`'Spalte 1'`) oder als Liste (`['Spalte 1', 'Spalte 2']`) übergebenen Beschriftungen. Der Parameter `axis` steuert, ob Zeilen oder Spalten (`axis = 1`) entfernt werden sollen. Die Parameter `index` und `columns` sind  alternative Möglichkeiten, Index- oder Spaltenbeschriftungen direkt zu übergeben und ersetzen die Parameter `labels` und `axis`.
 
   - `pd.DataFrame.insert(loc, column, value)` fügt eine Spalte an Position `loc` mit dem Spaltennamen `column` und dem Inhalt `value` ein. Falls `value` eine Series mit abweichendem Index ist, kann über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen und diese in den bestehenden Index einfgefügt werden (andernfalls gleicht Pandas die Indizes der Series und des DataFrames ab und fügt nur die Werte übereinstimmender Indizes ein).
 
-  - Werte können zeilweise mit der Methode `pd.DataFrame.loc[index] = value` eingefügt werden. Falls `value` eine Series ist, muss über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen werden, da Pandas andernfalls versucht, den Index der Series mit den Spaltennamen des DataFrames abzugleichen. Wird als `value` ein Einzelwert übergeben, füllt dieser die gesamte Zeile aus.
+  - Werte können zeilenweise mit der Methode `pd.DataFrame.loc[index] = value` eingefügt werden. Falls `value` eine Series ist, muss über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen werden, da Pandas andernfalls versucht, den Index der Series mit den Spaltennamen des DataFrames abzugleichen. Wird als `value` ein Einzelwert übergeben, füllt dieser die gesamte Zeile aus.
 
 ## Aufgaben verbinden und löschen
 Legen Sie einen leeren DataFrame `df = pd.DataFrame()` an.
 
-1. Fügen Sie Spalten 'len' und 'dose' aus dem DataFrame 'meerschweinchen' ein.
+1. Fügen Sie die Spalten 'len' und 'dose' aus dem DataFrame 'meerschweinchen' ein.
 
 2. Löschen Sie alle ungeraden Zeilennummern aus dem DataFrame df.
 

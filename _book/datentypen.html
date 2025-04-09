@@ -6,15 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Lukas Arnold">
-<meta name="author" content="Simone Arnold">
-<meta name="author" content="Florian Bagemihl">
-<meta name="author" content="Matthias Baitsch">
-<meta name="author" content="Marc Fehr">
-<meta name="author" content="Maik Poetzsch">
-<meta name="author" content="Sebastian Seipel">
 
-<title>Bausteine Computergestützter Datenanalyse</title>
+<title>4&nbsp; Datentypen – Bausteine Computergestützter Datenanalyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -37,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./skript/einleitung.html" rel="next">
+<link href="./datetime.html" rel="next">
+<link href="./plotting.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -89,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Werkzeugbaustein Pandas</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./datentypen.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datentypen</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
@@ -119,43 +147,43 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Werkzeugbaustein Pandas</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/einleitung.html" class="sidebar-item-text sidebar-link">
+  <a href="./einleitung.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/operationen.html" class="sidebar-item-text sidebar-link">
+  <a href="./operationen.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Operationen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/plotting.html" class="sidebar-item-text sidebar-link">
+  <a href="./plotting.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Grafikerstellung</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/datentypen.html" class="sidebar-item-text sidebar-link">
+  <a href="./datentypen.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datentypen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/datetime.html" class="sidebar-item-text sidebar-link">
+  <a href="./datetime.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Zeitreihen</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./skript/dateien.html" class="sidebar-item-text sidebar-link">
+  <a href="./dateien.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dateien lesen und schreiben</span></span></a>
   </div>
 </li>
@@ -164,50 +192,22 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Inhaltsverzeichnis</h2>
-   
-  <ul>
-  <li><a href="#werkzeugbaustein-pandas" id="toc-werkzeugbaustein-pandas" class="nav-link active" data-scroll-target="#werkzeugbaustein-pandas">Werkzeugbaustein Pandas</a>
-  <ul class="collapse">
-  <li><a href="#voraussetzungen" id="toc-voraussetzungen" class="nav-link" data-scroll-target="#voraussetzungen">Voraussetzungen</a></li>
-  <li><a href="#lernziele" id="toc-lernziele" class="nav-link" data-scroll-target="#lernziele">Lernziele</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bausteine Computergestützter Datenanalyse</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Datentypen</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor:innen</div>
-    <div class="quarto-title-meta-contents">
-             <p>Lukas Arnold </p>
-             <p>Simone Arnold </p>
-             <p>Florian Bagemihl </p>
-             <p>Matthias Baitsch </p>
-             <p>Marc Fehr </p>
-             <p>Maik Poetzsch </p>
-             <p>Sebastian Seipel </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">9. April 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -217,75 +217,158 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="werkzeugbaustein-pandas" class="level1 unnumbered">
-<h1 class="unnumbered">Werkzeugbaustein Pandas</h1>
-<div id="Lizenz" class="border">
-<div>
+<p><strong>An MF: Das Kapitel behandelt zu 80 Prozent NumPy… das kann man eventuell aufteilen.</strong></p>
+<p>Das Modul Pandas ist auf den Umgang mit unterschiedlichen Datentypen spezialisiert. Ein Dataframe kann unterschiedliche Datentypen enthalten (bspw. Zahlen und Wahrheitswerte).</p>
+<p>NumPy unterstützt folgende Datentypen:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Datentyp NumPy-Array</th>
+<th>Datentyp in Python</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>int_</td>
+<td>int</td>
+</tr>
+<tr class="even">
+<td>double</td>
+<td>float</td>
+</tr>
+<tr class="odd">
+<td>cdouble</td>
+<td>complex</td>
+</tr>
+<tr class="even">
+<td>bytes_</td>
+<td>bytes</td>
+</tr>
+<tr class="odd">
+<td>str_</td>
+<td>str</td>
+</tr>
+<tr class="even">
+<td>bool_</td>
+<td>bool</td>
+</tr>
+<tr class="odd">
+<td>datetime64</td>
+<td>datetime.datetime</td>
+</tr>
+<tr class="even">
+<td>timedelta64</td>
+<td>datetime.timedelta</td>
+</tr>
+</tbody>
+</table>
+<p>Die NumPy-Datentypen haben betriebssystemabhängige Synonyme. Beispielsweise wird für ein Array vom Datentyp <code>int_</code> der Datentyp <code>int</code> ausgegeben, für ein Array aus Gleitkommazahlen der Datentyp <code>float64</code>.</p>
+<div id="11abae47" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>skalar <span class="op">=</span> np.array([<span class="dv">2</span>])</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(skalar.dtype, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>skalar <span class="op">=</span> np.array([<span class="fl">2.1</span>])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(skalar.dtype)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>int64 
 
-</div>
-<div class="quarto-layout-panel" data-layout="[20, 80]">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 20.0%;justify-content: center;">
-<p><img src="skript/00-bilder/CC-BY.svg" class="img-fluid" alt="Symbol des Lizenzhinweises Creative Commons BY"></p>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 80.0%;justify-content: flex-start;">
-<p>Bausteine Computergestützter Datenanalyse von Lukas Arnold, Simone Arnold, Florian Bagemihl, Matthias Baitsch, Marc Fehr, Maik Poetzsch und Sebastian Seipel. Werkzeugbaustein Pandas von Maik Poetzsch ist lizensiert unter <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC BY 4.0</a>. Das Werk ist abrufbar auf <a href="https://github.com/bausteine-der-datenanalyse/w-pandas">GitHub</a>. Ausgenommen von der Lizenz sind alle Logos Dritter und anders gekennzeichneten Inhalte. 2025</p>
+float64</code></pre>
 </div>
 </div>
+<p>Außerdem gibt es für jeden NumPy-Datentyp ein Kürzel, das aus einem einzigen Buchstaben besteht. Beispielsweise wird für Zeichenfolgen das Kürzel <code>U</code> für Unicode-Zeichen und die Anzahl der Stellen ausgegeben (Für alle anderen Datentypen repräsentiert die Zahl die Anzahl der Bytes, die im Speicher benötigt werden.). Der Ausgabe ist ein Zeichen zur Kodiererung der <a href="https://de.wikipedia.org/wiki/Byte-Reihenfolge">Byte-Reihenfolge</a> im Speicher vorangestellt ‘&gt;’ (big-endian), ‘&lt;’ (little-endian) oder ‘=’ (Systemstandard).</p>
+<div id="31c7930a" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>skalar <span class="op">=</span> np.array([<span class="st">'2'</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(skalar.dtype, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>skalar <span class="op">=</span> np.array([<span class="st">'2.1'</span>])</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(skalar.dtype, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ein Datentyp mit mehr Speicherplatzbedarf kann zugewiesen werden</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>skalar <span class="op">=</span> np.array([<span class="dv">2</span>], dtype <span class="op">=</span> <span class="st">'U3'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(skalar.dtype)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;U1 
+
+&lt;U3 
+
+&lt;U3</code></pre>
 </div>
-<p>Zitiervorschlag</p>
-<p>Arnold, Lukas, Simone Arnold, Matthias Baitsch, Marc Fehr, Maik Poetzsch, und Sebastian Seipel. 2025. „Bausteine Computergestützter Datenanalyse. Werkzeugbaustein Pandas. <a href="https://github.com/bausteine-der-datenanalyse/w-pandas" class="uri">https://github.com/bausteine-der-datenanalyse/w-pandas</a>.</p>
-<p>BibTeX-Vorlage</p>
-<pre><code>@misc{BCD-w-pandas-2025,
- title={Bausteine Computergestützter Datenanalyse. Werkzeugbaustein Pandas},
- author={Arnold, Lukas and Arnold, Simone and Baitsch, Matthias and Fehr, Marc and Poetzsch, Maik and Seipel, Sebastian},
- year={2025},
- url={https://github.com/bausteine-der-datenanalyse/w-pandas}} </code></pre>
 </div>
-<section id="voraussetzungen" class="level2">
-<h2 class="anchored" data-anchor-id="voraussetzungen">Voraussetzungen</h2>
-<p>Folgende Bausteine sollte Sie bereits bearbeitet haben:</p>
+<p>Alle Synonyme und Kürzel können Sie der <a href="https://numpy.org/devdocs/reference/arrays.scalars.html">NumPy-Dokumentation</a> entnehmen.</p>
+<p>Häufig verwendet das Modul Pandas die NumPy-Datentypen. Pandas führt aber auch einige zusätzliche Datentypen ein. Eine vollständige Liste finden Sie in der <a href="https://pandas.pydata.org/docs/reference/arrays.html">Pandas Dokumentation</a>. Die wichtigsten zusätzlichen Datentypen sind:</p>
 <ul>
-<li>w-Python</li>
-<li>w-NumPy</li>
+<li><p><a href="https://pandas.pydata.org/docs/user_guide/categorical.html">Kategorie</a> <code>dtype = 'category'</code> für kategoriale, also ungeordnete, Daten.</p></li>
+<li><p><a href="https://pandas.pydata.org/docs/reference/api/pandas.Timestamp.html#pandas.Timestamp">Zeitzonenbewusstes Datumsformat</a> <code>dtype = 'datetime64[ns, US/Eastern]'</code></p></li>
+<li><p>Erweiterungen der NumPy-Datentypen mit Unterstützung fehlender Werte. Diese sind an der Großschreibung zu erkennen.</p></li>
 </ul>
-<p>In diesem Baustein werden die folgenden Module verwendet:</p>
-<ul>
-<li>NumPy</li>
-<li>Pandas</li>
-<li>Matplotlib</li>
-<li>zoneinfo (optional)</li>
-</ul>
-<p>Im Baustein werden folgende Daten verwendet:</p>
-<ul>
-<li>Zahnwachstum bei Meerschweinchen <a href="https://github.com/vincentarelbundock/Rdatasets/blob/master/csv/datasets/ToothGrowth.csv">CSV-Datei</a></li>
-<li>Fahrzeugdaten aus der Zeitschrift Motor Trend <a href="https://gist.github.com/seankross/a412dfbd88b3db70b74b">GitHub</a></li>
-<li>Vermessung von Pinguinen an der Palmer Station <a href="https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins">GitHub</a></li>
-<li>Kursdaten der Microsoft-Aktie <a href="https://www.kaggle.com/datasets/vijayvvenkitesh/microsoft-stock-time-series-analysis">kaggle</a></li>
-</ul>
-<p>Querverweis auf:</p>
-<ul>
-<li><p>m-Einlesen strukturierter Datensätze</p></li>
-<li><p>m-plotting</p></li>
-</ul>
-</section>
-<section id="lernziele" class="level2">
-<h2 class="anchored" data-anchor-id="lernziele">Lernziele</h2>
-<p>In diesem Baustein lernen Sie …</p>
-<ul>
-<li><p>die Datenstrukturen des Moduls Pandas Series und DataFrame kennen.</p></li>
-<li><p>wie Operationen in Pandas ausgeführt werden.</p></li>
-<li><p>wie Grafiken mit Pandas erstellt werden.</p></li>
-<li><p>Dateien einzulesen (und zu schreiben).</p></li>
-</ul>
-<p>Querverweis auf:</p>
-<ul>
-<li>m-plotting</li>
-</ul>
+<div id="e02b0daa" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NumPy-Datentyp int</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>series <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(series, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># NumPy-Datentyp int unterstützt fehlende Werte nicht</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  series <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan], dtype <span class="op">=</span> <span class="st">'int'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(error, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Pandas-Datentyp Int64 unterstützt fehlende Werte</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>series <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, np.nan], dtype <span class="op">=</span> <span class="st">'Int64'</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(series)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0    1
+1    2
+2    3
+dtype: int64 
+
+cannot convert float NaN to integer 
+
+0       1
+1       2
+2       3
+3    &lt;NA&gt;
+dtype: Int64</code></pre>
+</div>
+</div>
+<div id="wrn-string" class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis&nbsp;4.1: Pandas-Datentyp string
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>Pandas nutzt wie die Pythonbasis den Datentyp ‘string’, der unveränderlich (immutable) ist. Das bedeutet, es gibt keine Methode, die eine angelegte Zeichenkette verändern kann. Operationen mit diesem Datentyp geben ein neues Objekt mit dem Datentyp ‘string’ zurück.</p>
+<p>Die Übergabe des Datentyps ‘str’ führt zur Verwendung des NumPy-Datentyps string (dtype = ‘str’), der veränderlich (mutable) ist.</p>
+<p>Je nach Situation kann die Verwendung des einen oder des anderen Datentyps nützlich sein. Beispielsweise kann der NumPy-Datentyp ‘str’ mit der Methode <code>pd.Series.sum()</code> verkettet werden.</p>
+<div id="a21cbe90" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mit NumPy-Datentyp 'str'</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>string_series <span class="op">=</span> pd.Series([<span class="st">'H'</span>, <span class="st">'a'</span>, <span class="st">'l'</span>, <span class="st">'l'</span>, <span class="st">'o'</span>, <span class="st">'!'</span>], dtype <span class="op">=</span> <span class="st">'str'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Mit NumPy-Datentyp 'str': </span><span class="sc">{</span>string_series<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mit Pandas-Datentyp 'string'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  string_series.astype(<span class="st">'string'</span>).<span class="bu">sum</span>()</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> error:</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Mit Pandas-Datentyp 'string':"</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(error)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mit NumPy-Datentyp 'str': Hallo!
+
+Mit Pandas-Datentyp 'string':
+Cannot perform reduction 'sum' with string dtype</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -707,10 +790,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./plotting.html" class="pagination-link" aria-label="Grafikerstellung">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Grafikerstellung</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./skript/einleitung.html" class="pagination-link" aria-label="Einleitung">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Einleitung</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./datetime.html" class="pagination-link" aria-label="Zeitreihen">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Zeitreihen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

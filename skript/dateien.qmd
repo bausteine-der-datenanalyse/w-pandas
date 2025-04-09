@@ -1,0 +1,209 @@
+# Dateien lesen und schreiben
+**Dieser Teil ist aus dem m-EsD**  
+Pandas bietet eine Reihe von Funktionen, um Dateien einzulesen und zu schreiben, deren Namensgebung einem einheitlichen Schema folgt. Funktionen zum Lesen von Dateien werden in der Form `pd.read_csv()` und Funktionen zum Schreiben in der Form `pd.to_csv()` aufgerufen. Mit Pandas können auch Dateien aus dem Internet abgerufen werden `pd.read_csv(URL)`.
+
+```{python}
+#| echo: false
+
+import numpy as np
+import pandas as pd
+```
+
+:::: {.border}
+| Format Type | Data Description | Reader | Writer |
+|:---:|:---:|:---:|:---:|
+| text | CSV | read_csv | to_csv |
+| text | Fixed-Width Text File | read_fwf | NA |
+| text | JSON | read_json | to_json |
+| text | HTML | read_html | to_html |
+| text | LaTeX | Styler.to_latex | NA |
+| text | XML | read_xml | to_xml |
+| text | Local clipboard | read_clipboard | to_clipboard |
+| binary | MS Excel | read_excel | to_excel |
+| binary | OpenDocument | read_excel | NA |
+| binary | HDF5 Format | read_hdf | to_hdf |
+| binary | Feather Format | read_feather | to_feather |
+| binary | Parquet Format | read_parquet | to_parquet |
+| binary | ORC Format | read_orc | to_orc |
+| binary | Stata | read_stata | to_stata |
+| binary | SAS | read_sas | NA |
+| binary | SPSS | read_spss | NA |
+| binary | Python Pickle Format | read_pickle | to_pickle |
+| SQL | SQL | read_sql | to_sql |
+
+([Pandas Dokumentation](https://pandas.pydata.org/docs/user_guide/io.html))
+::::
+
+&nbsp;
+
+Im Folgenden wird der Datensatz palmerpenguins mit Pandas eingelesen.
+
+::: {.border}
+
+**palmerpenguins**
+
+![Pinguine des Palmer-Station-Datensatzes](00-bilder/lter_penguins_allison_horst_CC0.png)
+
+Meet the Palmer penguins von \@allison_horst steht unter der Lizenz [CC0-1.0](https://github.com/allisonhorst/palmerpenguins?tab=CC0-1.0-1-ov-file#creative-commons) und ist auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins) abrufbar. 2020
+
+Der Datensatz steht unter der Lizenz [CCO](https://creativecommons.org/public-domain/cc0/) und ist in R sowie auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file) verfügbar. 2020
+
+``` {.raw}
+# R Befehle, um den Datensatz zu laden
+install.packages("palmerpenguins")
+library(palmerpenguins)
+```
+
+Horst AM, Hill AP und Gorman KB. 2020. palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <https://allisonhorst.github.io/palmerpenguins/>. doi: 10.5281/zenodo.3960218.
+
+:::
+
+&nbsp;
+
+Die Funktionen zum Lesen von Dateien erwarten eine Pfadangabe, die positional oder mit einem Schlüsselwort übergeben werden kann. Das Schlüsselwort für die Pfadangabe variiert abhängig vom Dateityp und lautet für eine kommaseparierte CSV-Datei `filepath_or_buffer`.
+
+``` {python}
+penguins = pd.read_csv(filepath_or_buffer = '01-daten/penguins.csv')
+```
+
+Ein Blick auf die Daten mit der Methode `penguins.head()`:
+
+```{python}
+print(penguins.head())
+```
+
+::: {.border}
+
+![Schnabeldimensionen](00-bilder/culmen_depth_allison_horst_CC0.png)
+
+Bill dimensions von \@allison_horst steht unter der Lizenz [CC0-1.0](https://github.com/allisonhorst/palmerpenguins?tab=CC0-1.0-1-ov-file#creative-commons) und ist auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins) abrufbar. 2020
+
+:::
+
+&nbsp;
+
+Einen Überblick über den Datensatz verschafft die Methode `DataFrame.info()`.
+```{python}
+print(penguins.info())
+```
+
+Einige Datentypen wurden nicht erkannt. Den betreffenden Spalten wurde der Sammeltyp object zugeordnet. Den Funktionen zum Einlesen von Daten kann mit dem Argument `dtype` der Datentyp übergeben werden. Für mehrere Spalten ist dies in Form eines Dictionaries in der Form `{'Spaltenname': 'dtype'}` möglich. Mit der Methode `DataFrame.astype()` ist dies auch nachträglich möglich.
+
+```{python}
+penguins = pd.read_csv(filepath_or_buffer = '01-daten/penguins.csv', dtype = {'species': 'category', 'island': 'category', 'sex': 'category'})
+
+# nachträglich
+# penguins = penguins.astype({'species': 'category', 'island': 'category', 'sex': 'category'})
+
+print(penguins.info())
+```
+
+Einige Spalten weisen ungültige Werte auf. Die Tiere mit unvollständigen Werten sollen aus dem Datensatz entfernt werden. 
+
+  - Mit der Methode `DataFrame.apply(pd.isna)` werden fehlende Werte bestimmt.
+  - Mit der Methode `DataFrame.any(axis = 1)` wird das Ergebnis zeilenweise aggregiert. any gibt True zurück, wenn mindestens ein Element True ist.
+  - Mit der Methode `sum()` wird die Anzahl der Zeilen mit fehlenden Werten bestimmt.
+  - Mit `np.where()` wird deren Indexposition bestimmt.
+  - Mit der Methode `DataFrame.drop()` werden die betreffenden Zeilen entfernt.
+
+```{python}
+# Fehlende Werte bestimmen
+print(penguins.apply(pd.isna).head(), "\n")
+
+# zeilenweise aggregieren
+print(penguins.apply(pd.isna).any(axis = 1).head(), "\n")
+
+# Anzahl der Zeilen mit fehlenden Werten
+print(f"Für {penguins.apply(pd.isna).any(axis = 1).sum()} Pinguine liegen unvollständige Werte vor.\n")
+
+# Indexpositionen bestimmen
+print(np.where(penguins.apply(pd.isna).any(axis = 1))[0])
+
+# Zeilen entfernen
+penguins.drop(np.where(penguins.apply(pd.isna).any(axis = 1))[0], inplace = True)
+```
+
+Kontrolle:
+```{python}
+print(penguins.info())
+```
+
+## Zeitreihen einlesen
+Mit Pandas ist es leicht möglich, Zeitreihen einzulesen. Durch string parsing können beliebige Zeichenketten als datetime interpretiert werden.
+
+Wenn der innere Aufbau einer Datei bekannt ist, können die notwendigen Parameter direkt beim Einlesen beispielsweise mit `pd.read_csv()` übergeben werden. Dazu werden die Parameter `parse_dates` und `date_format` verwendet.
+
+`parse_dates` gibt an, an welcher Stelle sich datetime-Informationen befinden. Es können verschiedene Argumente übergeben werden.
+
+  - `parse_dates = True` bewirkt, dass der Index als datetime interpretiert wird.
+  - Eine Liste von Ganzzahlen oder Spaltenbeschriftungen bewirkt, dass diese Spalten jeweils als eigene Spalte in datetime übersetzt werden, bspw `parse_dates = [1, 2, 3]`.
+  - Eine von einer Liste umschlossene Liste bewirkt, dass die übergebenen Spalten in einer einzigen Spalte zusammengeführt werden, bspw. `parse_dates = [[1, 2, 3]]`. Die Werte der Spalten werden mit einem Leerzeichen getrennt und anschließend interpretiert.
+
+Pandas interpretiert die Zeichenketten nach [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) als Repräsentation eines Datums in der festgelegten Reihenfolge Jahr, Monat, Tag, Stunde, Minute, Sekunde, Millisekunde im Format `YYYY-MM-DD 12:00:00.000`. Als Zeichentrenner zwischen Datum und Uhrzeit sind ein Leerzeichen oder der Buchstabe T zulässig. Der Datentyp und die kleinste verwendete Einheit werden im Attribut `dtype` gespeichert.
+
+Andere Formate werden mit dem Parameter `date_format` spezifiziert. Mit Hilfe der [strftime-Dokumentation](https://docs.python.org/3/library/datetime.html#strftime-and-strptime-behavior) kann das Datumsformat übergeben werden.
+
+Datumsinformationen können aber auch nachträglich als solche deklariert werden. Dafür wird die Funktion `pd.to_datetime(arg, format = " ... ")` verwendet. Mit dem Parameter `arg` wird die zu konvertierende Spalte übergeben. Mit dem Parameter `format` kann wie mit dem Parameter `date_format` ein von der ISO8601 abweichendes Datumsformat spezifiziert werden.  
+
+Unter dem Pfad '01-daten/Microsoft_Stock.csv' sind Kursdaten der Microsoft-Aktie gespeichert.
+
+::: {.border}
+
+Microsoft Stock- Time Series Analysis von Vijay V Venkitesh steht unter der Lizenz [CC0](https://creativecommons.org/publicdomain/zero/1.0/) und ist auf [kaggle](https://www.kaggle.com/datasets/vijayvvenkitesh/microsoft-stock-time-series-analysis) abrufbar. 2021
+
+```{python}
+stock = pd.read_csv(filepath_or_buffer = '01-daten/Microsoft_Stock.csv')
+
+print(stock.head(), "\n")
+print(stock.info())
+```
+
+:::
+
+In der Spalte Date sind Datums- und Zeitinformationen in der Form 'Monat/Tag/Jahr Stunde:Minute:Sekunde' verzeichnet, die von Pandas nicht automatisch erkannt wurden. Die Spalte hat deshalb den Datentyp object erhalten.
+
+## Aufgaben Zeitreihen einlesen
+1. Übergeben Sie der Funktion `pd.read_csv()` die erforderlichen Argumente, um die Spalte Date korrekt als datetime einzulesen.
+
+2. Berechnen Sie die Höchstkurse für jede Woche (intraday).
+
+**Aufgabe 2 kann Marc testen, ob die zu schwierig ist.**
+
+::: {#tip-musterloesungzeitreihe .callout-tip collapse="true"} 
+## Musterlösung Zeitreihen einlesen
+
+1. Aufgabe
+```{python}
+stock = pd.read_csv(filepath_or_buffer = '01-daten/Microsoft_Stock.csv',
+        parse_dates = ['Date'], # alternativ: [0]
+        date_format = '%m/%d/%Y %H:%M:%S')
+
+print(stock.head(), "\n")
+print(stock.info())
+```
+
+2. Aufgabe
+
+Die Pandas-Methode `Series.dt.weekofyear()` wird seit einiger Zeit nicht mehr unterstützt ([siehe Dokumentation](https://pandas.pydata.org/pandas-docs/version/1.5/reference/api/pandas.Series.dt.weekofyear.html)). Die Funktion wurde durch `Series.dt.isocalendar().week` ersetzt. 
+
+```{python}
+# Jahr und Woche isolieren
+print(stock['Date'].dt.isocalendar().week.head(), "\n")
+print(stock['Date'].dt.isocalendar().year.tail())
+
+# Jahr und Woche in den DataFrame einfügen
+stock.insert(loc = 1, column = 'week', value = stock['Date'].dt.isocalendar().week)
+stock.insert(loc = 1, column = 'year', value = stock['Date'].dt.isocalendar().year)
+
+# Maximum für jede Woche mit groupby bestimmen
+print(stock.groupby(by = ['year', 'week'])['High'].max())
+
+# grafisch darstellen
+stock.groupby(by = ['year', 'week'])['High'].max().plot(ylabel = 'Wochenhöchstkurs (intraday)', title = 'Kursentwicklung der Microsoft-Aktie')
+
+```
+
+:::
+
+## Schwierige Dateien einlesen
+Das Einlesen von Dateien ist nicht immer einfach. Werkzeuge und Strategien zur Bewältigung schwieriger Fälle finden Sie im Methodenbaustein Einlesen strukturierter Datensätze **Querverweis auf m-EsD**. Dort wird auch der Umgang mit fehlenden Werten ausführlich behandelt.

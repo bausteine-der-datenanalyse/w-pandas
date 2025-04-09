@@ -16,17 +16,19 @@ book:
   date: today # "2024-03-05" Jahr-Monat-Tag / year-month-day
   chapters:
     - index.qmd
-    - einleitung.qmd
-    - operationen.qmd
-    - plotting.qmd
-
+    - skript/einleitung.qmd
+    - skript/operationen.qmd
+    - skript/plotting.qmd
+    - skript/datentypen.qmd
+    - skript/datetime.qmd
+    - skript/dateien.qmd
 
   sidebar:
     title: "Werkzeugbaustein Pandas"
     logo: "skript/00-bilder/logo_with_text_new.svg"    
    
 ## Bibliographie / bibliography
-bibliography: bibliography.bib
+bibliography: skript/bibliography.bib
 biblio-style: authoryear
 
 ## Spracheinstellungen / language settings

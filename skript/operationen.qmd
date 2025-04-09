@@ -18,7 +18,7 @@ temperaturen.columns = [2021, 2022, 2023, 2024]
 temperaturen.index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
 
 # meerschweinchen einlesen
-dateipfad = "skript/01-daten/ToothGrowth.csv"
+dateipfad = "01-daten/ToothGrowth.csv"
 meerschweinchen = pd.read_csv(filepath_or_buffer = dateipfad, sep = ',', header = 0, \
   names = ['ID', 'len', 'supp', 'dose'], dtype = {'ID': 'int', 'len': 'float', 'dose': 'float', 'supp': 'category'})
 ```
@@ -57,7 +57,7 @@ print(27 * "=")
 print(temperaturen.mul(9).div(5).add(32))
 ```
 
-Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt). Wie NumPys `np.nan` umfasst auch Pandas einen speziellen fehlenden Wert: `pd.NA` (achten Sie auf den Datentyp der Ausgabe). Mit fehlenden Werten werden wir uns später ausführlicher beschäftigen.
+Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt). Wie NumPys `np.nan` umfasst auch Pandas einen speziellen fehlenden Wert: `pd.NA` (achten Sie auf den Datentyp der Ausgabe). Der Umgang mit fehlenden Werten wird ausführlich im Methodenbaustein Einlesen strukturierter Datensätze behandelt **Querverweis hier**.
 
 ```{python}
 #| warning: false
@@ -212,7 +212,7 @@ print(temperaturen.apply({2021: "sum", 2022: "mean", 2023: "median", 2024: "min"
 
 :::
 
-Besonders nützlich ist die Möglichkeit, Funktionen, die normalerweise auf eine Series angewendet werden, auf jedes Element der Series anzuwenden. Dafür wird die lambda Syntax verwendet: `lambda x: x + 1` . lambda ist ein Platzhalter und kann als "für jedes x tue:" gelesen werden. So kann beispielsweise die Anzahl der Zeichen in jeder Zeile bestimmt werden.
+Besonders nützlich ist die Möglichkeit, Funktionen, die normalerweise auf eine Series angewendet werden, auf jedes Element der Series anzuwenden. Dafür wird die lambda Syntax verwendet: `lambda x: x + 1`. lambda ist ein Platzhalter und kann als "für jedes x tue:" gelesen werden. So kann beispielsweise die Anzahl der Zeichen in jeder Zeile bestimmt werden.
 
 ```{python}
 #| warning: false
@@ -327,7 +327,7 @@ print(temperaturen.sort_index(), "\n")
 print(temperaturen.sort_index(axis = 1, ascending = False))
 ```
 
-Die Methode `DataFrame.sort_values(by, *, axis = 0, ascending = True, inplace = False)` sortiert Werte entlang einer Achse, standardmäßig entlang des Index (`axis = 0`). Dem Parameter `by` sind [laut Dokumentation](https://pandas.pydata.org/pandas-docs/version/2.1/reference/api/pandas.DataFrame.sort_values.html) der Spaltenname als string bzw. eine Liste von Spaltennamen als string zu übergeben, nach denen sortiert werden soll. Wie im folgenden Code-Beispiel zu sehen ist, muss die numerische Spaltenbeschriftung auch entsprechend übergeben werden.
+Die Methode `DataFrame.sort_values(by, *, axis = 0, ascending = True, inplace = False)` sortiert Werte entlang einer Achse, standardmäßig entlang des Index (`axis = 0`). Dem Parameter `by` sind [laut Dokumentation](https://pandas.pydata.org/pandas-docs/version/2.1/reference/api/pandas.DataFrame.sort_values.html) der Spaltenname als string bzw. eine Liste von Spaltennamen als string zu übergeben, nach denen sortiert werden soll. Wie im folgenden Code-Beispiel zu sehen ist, muss die numerische Spaltenbeschriftung jedoch auch in numerischer Form übergeben werden.
 
 Wird mit dem Argument `axis = 1` entlang der zweiten Dimension sortiert, werden entsprechend Indexbeschriftungen übergeben.
 
@@ -373,7 +373,7 @@ print("Die ID lautet:", dose_1.sort_values(by = 'len', ascending = False).iloc[0
 :::
 
 ## GroupBy
-Die Methode `pd.groupby()` teilt einen DataFrame (oder eine Series) in Gruppen auf und gibt ein GroupBy-Objekt zurück. Das GroupBy-Objekt hat dieselben Spalten- und Zeilenbeschriftungen, wie der DataFrame, das GroupBy-Objekt ist aber nach der Gruppenaufteilung sortiert. Operationen, die auf das GroupBy-Objekt angewendet werden, werden für jede Gruppe separat ausgeführt. 
+Die Methode `pd.groupby()` teilt einen DataFrame (oder eine Series) in Gruppen auf und gibt ein GroupBy-Objekt zurück. Das GroupBy-Objekt hat dieselben Spalten- und Zeilenbeschriftungen wie der DataFrame, das GroupBy-Objekt ist aber nach der Gruppenaufteilung sortiert. Operationen, die auf das GroupBy-Objekt angewendet werden, werden für jede Gruppe separat ausgeführt. 
 
 Dies kann am Datensatz 'meerschweinchen' im folgenden Panel nachvollzogen werden.
 
