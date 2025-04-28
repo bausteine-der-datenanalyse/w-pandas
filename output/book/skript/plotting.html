@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.556">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Bausteine Computergestützter Datenanalyse - 3&nbsp; Grafikerstellung</title>
+<title>3&nbsp; Grafikerstellung – Bausteine Computergestützter Datenanalyse</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-e018ad72096c98ab8170000a0dfe2dea.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -114,13 +114,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../skript/plotting.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Grafikerstellung</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -229,12 +229,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="series" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="series"><span class="header-section-number">3.1</span> Series</h2>
 <p>Eine Series wird gegen den Index geplottet. Standardmäßig wird ein Liniendiagramm gezeichnet. Mit den Parametern <code>xlabel</code> und <code>ylabel</code> können Achsenbeschriftungen eingetragen werden.</p>
-<div id="5fd1b8d6" class="cell" data-execution_count="2">
+<div id="31ae79c1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen[<span class="st">'len'</span>].plot(xlabel <span class="op">=</span> <span class="st">'Index'</span>, ylabel <span class="op">=</span> <span class="st">'len'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-3-output-1.png" alt="Liniendiagramm des Indexes (0 bis 59) gegen die Länge zahnbildender Zellen von Meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="585" height="430" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm des Indexes (0 bis 59) gegen die Länge zahnbildender Zellen von Meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
@@ -257,12 +257,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>grid = True</code> fügt Gitternetzlinien ein.</li>
 <li><code>xlim = (min, max)</code> / <code>ylim = (min, max)</code> setzt den Wertebereich der x- bzw. y-Achse.</li>
 </ul>
-<div id="0a55fc68" class="cell" data-execution_count="3">
+<div id="a2949830" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen[<span class="st">'dose'</span>].value_counts().plot(kind <span class="op">=</span> <span class="st">'pie'</span>, ylabel <span class="op">=</span> <span class="st">'Dosis'</span>, colormap <span class="op">=</span> <span class="st">'Blues'</span>, figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">6</span>), legend <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> <span class="st">'Tortendiagramm der Dosis Vitamin C'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-4-output-1.png" alt="Tortendiagramm der Vitamin C Dosis im Datensatz meerschweinchen mit drei gleich großen Segmenten für die Dosen 0.5, 1.0 und 2.0. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="481" height="483" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img" alt="Tortendiagramm der Vitamin C Dosis im Datensatz meerschweinchen mit drei gleich großen Segmenten für die Dosen 0.5, 1.0 und 2.0. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
@@ -271,24 +271,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataframe" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="dataframe"><span class="header-section-number">3.2</span> DataFrame</h2>
 <p>Für DataFrames sind weitere Optionen verfügbar. Mittels der Parameter <code>x</code> und <code>y</code> können Spalten oder Zeilen ausgewählt werden, die auf den jeweiligen Achsen aufgetragen werden sollen. <code>y</code> kann dabei auch eine Liste mit mehreren Einträgen enthalten.</p>
-<div id="b6ab65d6" class="cell" data-execution_count="4">
+<div id="3ea67e9e" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-5-output-1.png" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="566" height="429" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Für DataFrames ist das Streudiagramm als Diagrammtyp verfügbar.</p>
-<div id="99df0ed2" class="cell" data-execution_count="5">
+<div id="5b416839" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> <span class="st">'len'</span>, kind <span class="op">=</span> <span class="st">'scatter'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-6-output-1.png" alt="Streudiagramm der Länge zahnbildender Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="585" height="430" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img" alt="Streudiagramm der Länge zahnbildender Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
@@ -297,31 +297,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="subplots" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="subplots"><span class="header-section-number">3.3</span> subplots</h2>
 <p>Mit dem Argument <code>subplots = True</code> werden Teilgrafiken erstellt. Dabei wird automatisch das Argument <code>sharex = True</code> gesetzt, sodass beide Teilgrafiken eine gemeinsame x-Achse nutzen teilen. Dem Parameter <code>title</code> können Überschriften für jede Teilgrafik als Liste übergeben werden.</p>
-<div id="9c56b462" class="cell" data-execution_count="6">
+<div id="1b396a82" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-7-output-1.png" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="571" height="449" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Ebenso ist das Argument <code>sharey = True</code> verfügbar. Das Argument <code>sharex</code> wird auf False gesetzt.</p>
-<div id="b524abb9" class="cell" data-execution_count="7">
+<div id="58015bca" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-8-output-1.png" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken mit gleich skalierter y-Achse gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="566" height="449" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken mit gleich skalierter y-Achse gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Um die überdeckte Beschriftung der x-Achse zu beheben, muss auf einen Befehl aus dem Modul matplotlib.pyplot zurückgegriffen werden.</p>
-<div id="540a8d74" class="cell" data-execution_count="8">
+<div id="d37ee848" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span>
@@ -329,14 +329,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-9-output-1.png" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="662" height="470" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
 </div>
 <p>&nbsp;</p>
 <p>Auch um für jede Teilgrafik eine y-Achsenbeschriftung zu setzen, muss auf matplotlib zurückgegriffen werden.</p>
-<div id="7bf8fab2" class="cell" data-execution_count="9">
+<div id="56a7facd" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mein_plot <span class="op">=</span> meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mein_plot[<span class="dv">0</span>].set_ylabel(<span class="st">'Milligramm pro Tag'</span>)</span>
@@ -346,7 +346,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="plotting_files/figure-html/cell-10-output-1.png" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung." width="662" height="470" class="figure-img"></p>
+<p><img src="plotting_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img" alt="Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."></p>
 </figure>
 </div>
 </div>
@@ -391,18 +391,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -434,7 +423,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -442,7 +451,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -539,7 +548,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
