@@ -424,7 +424,7 @@ Zeitschrift Motor Trend von 1974 und enthalt Daten für 32 Autos.
 
 :::: {#lst-readfile2}
 ```{python}
-mtcars = pd.read_csv(filepath_or_buffer = "C:/Users/mapoe004/Desktop/Arbeitsordner Maik Poetzsch/BCD/Bausteine/Werkzeugbausteine/w-Pandas/w-pandas/aufgaben/01-daten/mtcars.csv", sep = ",")
+mtcars = pd.read_csv(filepath_or_buffer = "01-daten/mtcars.csv", sep = ",")
 mtcars.rename(columns = {'Unnamed: 0': 'car'}, inplace = True)
 
 mtcars.head()
