@@ -1,4 +1,4 @@
 # w-pandas
 Werkzeugbaustein Pandas
 
-bausteine-der-datenanalyse_w-pandas.htm # fix me
+https://bausteine-der-datenanalyse.github.io/w-pandas/output/book/
