@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="series" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="series"><span class="header-section-number">3.1</span> Series</h2>
 <p>Eine Series wird gegen den Index geplottet. Standardmäßig wird ein Liniendiagramm gezeichnet. Mit den Parametern <code>xlabel</code> und <code>ylabel</code> können Achsenbeschriftungen eingetragen werden.</p>
-<div id="30a05794" class="cell" data-execution_count="2">
+<div id="62726b3c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen[<span class="st">'len'</span>].plot(xlabel <span class="op">=</span> <span class="st">'Index'</span>, ylabel <span class="op">=</span> <span class="st">'len'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>grid = True</code> fügt Gitternetzlinien ein.</li>
 <li><code>xlim = (min, max)</code> / <code>ylim = (min, max)</code> setzt den Wertebereich der x- bzw. y-Achse.</li>
 </ul>
-<div id="a10b2da1" class="cell" data-execution_count="3">
+<div id="04b75f63" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen[<span class="st">'dose'</span>].value_counts().plot(kind <span class="op">=</span> <span class="st">'pie'</span>, ylabel <span class="op">=</span> <span class="st">'Dosis'</span>, colormap <span class="op">=</span> <span class="st">'Blues'</span>, figsize <span class="op">=</span> (<span class="dv">6</span>, <span class="dv">6</span>), legend <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> <span class="st">'Tortendiagramm der Dosis Vitamin C'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataframe" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="dataframe"><span class="header-section-number">3.2</span> DataFrame</h2>
 <p>Für DataFrames sind weitere Optionen verfügbar. Mittels der Parameter <code>x</code> und <code>y</code> können Spalten oder Zeilen ausgewählt werden, die auf den jeweiligen Achsen aufgetragen werden sollen. <code>y</code> kann dabei auch eine Liste mit mehreren Einträgen enthalten.</p>
-<div id="32291e33" class="cell" data-execution_count="4">
+<div id="16c44955" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>])</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -283,7 +283,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 <p>Für DataFrames ist das Streudiagramm als Diagrammtyp verfügbar.</p>
-<div id="8d12c794" class="cell" data-execution_count="5">
+<div id="9d3cfaf5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> <span class="st">'len'</span>, kind <span class="op">=</span> <span class="st">'scatter'</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="subplots" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="subplots"><span class="header-section-number">3.3</span> subplots</h2>
 <p>Mit dem Argument <code>subplots = True</code> werden Teilgrafiken erstellt. Dabei wird automatisch das Argument <code>sharex = True</code> gesetzt, sodass beide Teilgrafiken eine gemeinsame x-Achse nutzen teilen. Dem Parameter <code>title</code> können Überschriften für jede Teilgrafik als Liste übergeben werden.</p>
-<div id="7383ea2f" class="cell" data-execution_count="6">
+<div id="955d389c" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 <p>Ebenso ist das Argument <code>sharey = True</code> verfügbar. Das Argument <code>sharex</code> wird auf False gesetzt.</p>
-<div id="6734f340" class="cell" data-execution_count="7">
+<div id="bbbd1b59" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -321,7 +321,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 <p>Um die überdeckte Beschriftung der x-Achse zu beheben, muss auf einen Befehl aus dem Modul matplotlib.pyplot zurückgegriffen werden.</p>
-<div id="9f25deb2" class="cell" data-execution_count="8">
+<div id="bf0fddc2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span>
@@ -336,7 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&nbsp;</p>
 <p>Auch um für jede Teilgrafik eine y-Achsenbeschriftung zu setzen, muss auf matplotlib zurückgegriffen werden.</p>
-<div id="cb2a4d8f" class="cell" data-execution_count="9">
+<div id="3e598bf9" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mein_plot <span class="op">=</span> meerschweinchen.plot(x <span class="op">=</span> <span class="st">'ID'</span>, y <span class="op">=</span> [<span class="st">'dose'</span>, <span class="st">'len'</span>], subplots <span class="op">=</span> <span class="va">True</span>, sharex <span class="op">=</span> <span class="va">False</span>, sharey <span class="op">=</span> <span class="va">True</span>, title <span class="op">=</span> [<span class="st">'Vitamin C Dosis'</span>, <span class="st">'Länge zahnbildender Zellen'</span>])<span class="op">;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>mein_plot[<span class="dv">0</span>].set_ylabel(<span class="st">'Milligramm pro Tag'</span>)</span>
