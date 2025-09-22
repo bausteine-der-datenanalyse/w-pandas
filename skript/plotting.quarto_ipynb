@@ -1,0 +1,246 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Grafikerstellung\n",
+        "Mit der Methode `pd.plot()` können Series und DataFrame grafisch dargestellt werden. Dazu greift Pandas auf matplotlib zurück. Die Syntax von Pandas ist einfacher, dafür bietet das Modul weniger Möglichkeiten als matplotlib. Jedoch können Befehle aus Pandas und aus matplotlib zur Grafikerstellung kombiniert werden. Eine ausführliche Einführung in die Grafikerstellung mit erhalten Sie im Baustein **Querverweis auf m-plotting**.\n"
+      ],
+      "id": "25b1e935"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "# recreate DataFrame from previous chapter\n",
+        "import numpy as np\n",
+        "import pandas as pd\n",
+        "\n",
+        "# DataFrame erzeugen\n",
+        "temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5])\n",
+        "temperaturen_2022 = pd.Series([3, 6, 9, 13, 18, 21, 24, 23, 19, 14, 8, 4])\n",
+        "temperaturen_2023 = pd.Series([-3, -1, 4, 9, 15, 20, 20, 19, 16, 15, 7, 6])\n",
+        "temperaturen_2024 = pd.Series([-1, 2, 5, 8, 17, 24, 25, 20, 17, 14, 9, 2])\n",
+        "\n",
+        "temperaturen = pd.concat([temperaturen_2021, temperaturen_2022, temperaturen_2023, temperaturen_2024], axis = 1)\n",
+        "temperaturen.columns = [2021, 2022, 2023, 2024]\n",
+        "temperaturen.index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']\n",
+        "\n",
+        "# meerschweinchen einlesen\n",
+        "dateipfad = \"01-daten/ToothGrowth.csv\"\n",
+        "meerschweinchen = pd.read_csv(filepath_or_buffer = dateipfad, sep = ',', header = 0, \\\n",
+        "  names = ['ID', 'len', 'supp', 'dose'], dtype = {'ID': 'int', 'len': 'float', 'dose': 'float', 'supp': 'category'})"
+      ],
+      "id": "157a27b5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Series\n",
+        "Eine Series wird gegen den Index geplottet. Standardmäßig wird ein Liniendiagramm gezeichnet. Mit den Parametern `xlabel` und `ylabel` können Achsenbeschriftungen eingetragen werden.\n"
+      ],
+      "id": "f17d4ea5"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm des Indexes (0 bis 59) gegen die Länge zahnbildender Zellen von Meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen['len'].plot(xlabel = 'Index', ylabel = 'len')"
+      ],
+      "id": "d0719d42",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Mit dem Parameter `kind` kann der Grafiktyp geändert werden. Einige Möglichkeiten sind:\n",
+        "\n",
+        "  - `'line'`: Standardwert Liniendiagramm\n",
+        "  - `'bar'`: vertikales Balkendiagramm\n",
+        "  - `'hbar'`: horizontales Balkendiagramm\n",
+        "  - `'hist'`: Histogramm\n",
+        "  - `'box'`: Boxplot\n",
+        "  - `'pie'`: Tortendiagramm\n",
+        "\n",
+        "Einige sinnvolle Parameter sind:\n",
+        "\n",
+        "  - `colormap = palette` ändert die Farbpalette. Eine Liste der in matplotlib verfügbaren Paletten finden Sie in der [Dokumentation](https://matplotlib.org/stable/users/explain/colors/colormaps.html).\n",
+        "  - `figsize = (Breite, Höhe)` Tupel der Bildgröße in Zoll\n",
+        "  - `legend = True` zeichnet eine Legende ein..\n",
+        "  - `title = 'Titel'` trägt einen Titel ein.\n",
+        "  - `grid = True` fügt Gitternetzlinien ein.\n",
+        "  - `xlim = (min, max)` / `ylim = (min, max)` setzt den Wertebereich der x- bzw. y-Achse.\n"
+      ],
+      "id": "c408f812"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Tortendiagramm der Vitamin C Dosis im Datensatz meerschweinchen mit drei gleich großen Segmenten für die Dosen 0.5, 1.0 und 2.0. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen['dose'].value_counts().plot(kind = 'pie', ylabel = 'Dosis', colormap = 'Blues', figsize = (6, 6), legend = True, title = 'Tortendiagramm der Dosis Vitamin C')"
+      ],
+      "id": "d1242d9b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## DataFrame\n",
+        "Für DataFrames sind weitere Optionen verfügbar. Mittels der Parameter `x` und `y` können Spalten oder Zeilen ausgewählt werden, die auf den jeweiligen Achsen aufgetragen werden sollen. `y` kann dabei auch eine Liste mit mehreren Einträgen enthalten.\n"
+      ],
+      "id": "575a7e4f"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen.plot(x = 'ID', y = ['dose', 'len'])"
+      ],
+      "id": "ea1f3c00",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "&nbsp;\n",
+        "\n",
+        "Für DataFrames ist das Streudiagramm als Diagrammtyp verfügbar.\n"
+      ],
+      "id": "0dfd0cb6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Streudiagramm der Länge zahnbildender Zellen gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen.plot(x = 'ID', y = 'len', kind = 'scatter')"
+      ],
+      "id": "3eb979c5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## subplots\n",
+        "Mit dem Argument `subplots = True` werden Teilgrafiken erstellt. Dabei wird automatisch das Argument `sharex = True` gesetzt, sodass beide Teilgrafiken eine gemeinsame x-Achse nutzen teilen. Dem Parameter `title` können Überschriften für jede Teilgrafik als Liste übergeben werden."
+      ],
+      "id": "f498993a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen.plot(x = 'ID', y = ['dose', 'len'], subplots = True, title = ['Vitamin C Dosis', 'Länge zahnbildender Zellen']);"
+      ],
+      "id": "f5af95d5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "&nbsp;\n",
+        "\n",
+        "Ebenso ist das Argument `sharey = True` verfügbar. Das Argument `sharex` wird auf False gesetzt."
+      ],
+      "id": "9c6d1ef7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken mit gleich skalierter y-Achse gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "meerschweinchen.plot(x = 'ID', y = ['dose', 'len'], subplots = True, sharex = False, sharey = True, title = ['Vitamin C Dosis', 'Länge zahnbildender Zellen']);"
+      ],
+      "id": "3e4615a3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "&nbsp;\n",
+        "\n",
+        "Um die überdeckte Beschriftung der x-Achse zu beheben, muss auf einen Befehl aus dem Modul matplotlib.pyplot zurückgegriffen werden."
+      ],
+      "id": "d673328c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "meerschweinchen.plot(x = 'ID', y = ['dose', 'len'], subplots = True, sharex = False, sharey = True, title = ['Vitamin C Dosis', 'Länge zahnbildender Zellen']);\n",
+        "plt.tight_layout()"
+      ],
+      "id": "b704db89",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "&nbsp;\n",
+        "\n",
+        "Auch um für jede Teilgrafik eine y-Achsenbeschriftung zu setzen, muss auf matplotlib zurückgegriffen werden.\n"
+      ],
+      "id": "3bbae69e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| fig-alt: \"Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung.\"\n",
+        "\n",
+        "mein_plot = meerschweinchen.plot(x = 'ID', y = ['dose', 'len'], subplots = True, sharex = False, sharey = True, title = ['Vitamin C Dosis', 'Länge zahnbildender Zellen']);\n",
+        "\n",
+        "mein_plot[0].set_ylabel('Milligramm pro Tag')\n",
+        "mein_plot[1].set_ylabel('Micron')\n",
+        "plt.tight_layout()\n",
+        "plt.show()"
+      ],
+      "id": "8e58510e",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\mapoe004\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

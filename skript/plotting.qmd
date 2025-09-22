@@ -1,5 +1,5 @@
 # Grafikerstellung
-Mit der Methode `pd.plot()` können Series und DataFrame grafisch dargestellt werden. Dazu greift Pandas auf matplotlib zurück. Die Syntax von Pandas ist einfacher, dafür bietet das Modul weniger Möglichkeiten als matplotlib. Jedoch können Befehle aus Pandas und aus matplotlib zur Grafikerstellung kombiniert werden. Eine ausführliche Einführung in die Grafikerstellung mit erhalten Sie im Baustein **Querverweis auf m-plotting**.
+Mit der Methode `pd.plot()` können Series und DataFrame grafisch dargestellt werden. Dazu greift Pandas auf matplotlib zurück. Die Syntax von Pandas ist einfacher, dafür bietet das Modul weniger Möglichkeiten als matplotlib. Jedoch können Befehle aus Pandas und aus matplotlib zur Grafikerstellung kombiniert werden (siehe [Werkzeugbaustein Matplotlib](https://bausteine-der-datenanalyse.github.io/w-python-matplotlib/output/book/)).
 
 ```{python}
 #| echo: false

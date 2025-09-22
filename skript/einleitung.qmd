@@ -246,8 +246,6 @@ print(df)
 :::
 
 ## Deskriptive Datenanalyse mit Pandas
-**Dieser Teil ist zu großen Teilen auch im m-EsD enthalten --> eine Dopplung wäre okay, ein Querverweis kann aber auch ergänzt werden.**  
-
 Pandas bietet einige praktische Funktionen, um den Aufbau eines Datensatzes und die enthaltenen Daten zu beschreiben. Als Beispieldatensatz dienen Daten zur Länge zahnbildender Zellen bei Meerschweinchen, die Vitamin C direkt (VC) oder in Form von Orangensaft (OJ) in unterschiedlichen Dosen erhielten.
 
 :::: {.border}
@@ -322,8 +320,6 @@ meerschweinchen['dose'].unique()
 ```
 
 ## Slicing
-**Hinweis: dieser Abschnitt kommt ähnlich auch im m-EsD vor.**
-
 ::: {.border}
 ![zweidimensionaler Datensatz](00-bilder/zweidimensionaler-datensatz-slicing-mf-mp.png){width="45%" fig-alt="Dargestellt ist ein zweidimensionaler Block, der einen zweidimensionalen Datensatz repräsentiert. Pfeile repräsentieren die zwei Achsen. Die nullte Achse entspricht der Länge (von oben nach unten) und die erste Achse der Breite des Datensatzes."}
 

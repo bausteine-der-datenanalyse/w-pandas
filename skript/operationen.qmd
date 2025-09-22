@@ -57,7 +57,7 @@ print(27 * "=")
 print(temperaturen.mul(9).div(5).add(32))
 ```
 
-Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt). Wie NumPys `np.nan` umfasst auch Pandas einen speziellen fehlenden Wert: `pd.NA` (achten Sie auf den Datentyp der Ausgabe). Der Umgang mit fehlenden Werten wird ausführlich im Methodenbaustein Einlesen strukturierter Datensätze behandelt **Querverweis hier**.
+Außerdem kann mit dem Parameter ` fill_value` ein Füllwert für fehlende Werte spezifiziert werden (dieser wird vor der Operation eingesetzt). Wie NumPys `np.nan` umfasst auch Pandas einen speziellen fehlenden Wert: `pd.NA` (achten Sie auf den Datentyp der Ausgabe). Der Umgang mit fehlenden Werten wird ausführlich im [Methodenbaustein Einlesen strukturierter Datensätze](https://bausteine-der-datenanalyse.github.io/m-einlesen-strukturierter-datensaetze/output/book/) behandelt.
 
 ```{python}
 #| warning: false
@@ -126,7 +126,7 @@ print(temperaturen.isin(temperaturen[2021]), "\n")
 temperaturen_2021_falscher_index = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5])
 temperaturen_2021_falscher_index.index = ['A', 'B', 'C', 'D', 'E', 'F', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
 
-print("Der Index der Series lautet:\n['A', 'B', 'C', 'D', 'E', 'F', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']. Das Ergebnis an den Indexpositionen A-F ist immer False.")
+print("Der Index der Series lautet:\n['A', 'B', 'C', 'D', 'E', 'F', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'].\nDas Ergebnis an den Indexpositionen A-F ist immer False.")
 print(temperaturen.isin(temperaturen_2021_falscher_index))
 
 ```

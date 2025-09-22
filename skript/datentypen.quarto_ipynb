@@ -1,0 +1,181 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Datentypen\n",
+        "**An MF: Das Kapitel behandelt zu 80 Prozent NumPy... das kann man eventuell aufteilen.**\n",
+        "\n",
+        "Das Modul Pandas ist auf den Umgang mit unterschiedlichen Datentypen spezialisiert. Ein Dataframe kann unterschiedliche Datentypen enthalten (bspw. Zahlen und Wahrheitswerte).\n"
+      ],
+      "id": "dc5c2ab4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| echo: false\n",
+        "\n",
+        "import numpy as np\n",
+        "import pandas as pd"
+      ],
+      "id": "71afd811",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "NumPy unterstützt folgende Datentypen:\n",
+        "\n",
+        "|      Datentyp NumPy-Array  |      Datentyp in Python |\n",
+        "|---|---|\n",
+        "|     int_    |     int    |\n",
+        "|     double    |     float    |\n",
+        "|     cdouble    |     complex    |\n",
+        "|     bytes_    |     bytes    |\n",
+        "|     str_    |     str    |\n",
+        "|     bool_    |     bool    |\n",
+        "|     datetime64    |     datetime.datetime    |\n",
+        "|     timedelta64    |     datetime.timedelta    |\n",
+        "\n",
+        "&nbsp;\n",
+        "\n",
+        "Die NumPy-Datentypen haben betriebssystemabhängige Synonyme. Beispielsweise wird für ein Array vom Datentyp `int_` der Datentyp `int` ausgegeben, für ein Array aus Gleitkommazahlen der Datentyp `float64`. \n"
+      ],
+      "id": "e2e4752d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "skalar = np.array([2])\n",
+        "print(skalar.dtype, \"\\n\")\n",
+        "\n",
+        "skalar = np.array([2.1])\n",
+        "\n",
+        "print(skalar.dtype)"
+      ],
+      "id": "740317de",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Außerdem gibt es für jeden NumPy-Datentyp ein Kürzel, das aus einem einzigen Buchstaben besteht. Beispielsweise wird für Zeichenfolgen das Kürzel `U` für Unicode-Zeichen und die Anzahl der Stellen ausgegeben (Für alle anderen Datentypen repräsentiert die Zahl die Anzahl der Bytes, die im Speicher benötigt werden.). Der Ausgabe ist ein Zeichen zur Kodiererung der [Byte-Reihenfolge](https://de.wikipedia.org/wiki/Byte-Reihenfolge) im Speicher vorangestellt '>' (big-endian), '<' (little-endian) oder '=' (Systemstandard).\n"
+      ],
+      "id": "534fedf7"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "skalar = np.array(['2'])\n",
+        "print(skalar.dtype, \"\\n\")\n",
+        "\n",
+        "skalar = np.array(['2.1'])\n",
+        "print(skalar.dtype, \"\\n\")\n",
+        "\n",
+        "# Ein Datentyp mit mehr Speicherplatzbedarf kann zugewiesen werden\n",
+        "skalar = np.array([2], dtype = 'U3')\n",
+        "print(skalar.dtype)"
+      ],
+      "id": "f93d2203",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Alle Synonyme und Kürzel können Sie der [NumPy-Dokumentation](https://numpy.org/devdocs/reference/arrays.scalars.html) entnehmen.\n",
+        "\n",
+        "Häufig verwendet das Modul Pandas die NumPy-Datentypen. Pandas führt aber auch einige zusätzliche Datentypen ein. Eine vollständige Liste finden Sie in der [Pandas Dokumentation](https://pandas.pydata.org/docs/reference/arrays.html). Die wichtigsten zusätzlichen Datentypen sind:\n",
+        "\n",
+        "  - [Kategorie](https://pandas.pydata.org/docs/user_guide/categorical.html) `dtype = 'category'` für kategoriale, also ungeordnete, Daten.\n",
+        "\n",
+        "  - [Zeitzonenbewusstes Datumsformat](https://pandas.pydata.org/docs/reference/api/pandas.Timestamp.html#pandas.Timestamp) `dtype = 'datetime64[ns, US/Eastern]'`\n",
+        "\n",
+        "  - Erweiterungen der NumPy-Datentypen mit Unterstützung fehlender Werte. Diese sind an der Großschreibung zu erkennen.\n"
+      ],
+      "id": "4c863f24"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# NumPy-Datentyp int\n",
+        "series = pd.Series([1, 2, 3], dtype = 'int')\n",
+        "print(series, \"\\n\")\n",
+        "\n",
+        "# NumPy-Datentyp int unterstützt fehlende Werte nicht\n",
+        "try:\n",
+        "  series = pd.Series([1, 2, 3, np.nan], dtype = 'int')\n",
+        "except Exception as error:\n",
+        "    print(error, \"\\n\")\n",
+        "\n",
+        "# Pandas-Datentyp Int64 unterstützt fehlende Werte\n",
+        "series = pd.Series([1, 2, 3, np.nan], dtype = 'Int64')\n",
+        "print(series)"
+      ],
+      "id": "d5c98275",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "::: {#wrn-string .callout-warning appearance=\"simple\" collapse=\"false\"}\n",
+        "## Pandas-Datentyp string\n",
+        "Pandas nutzt wie die Pythonbasis den Datentyp 'string', der unveränderlich (immutable) ist. Das bedeutet, es gibt keine Methode, die eine angelegte Zeichenkette verändern kann. Operationen mit diesem Datentyp geben ein neues Objekt mit dem Datentyp 'string' zurück.\n",
+        "\n",
+        "Die Übergabe des Datentyps 'str' führt zur Verwendung des NumPy-Datentyps string (dtype = 'str'), der veränderlich (mutable) ist.\n",
+        "\n",
+        "Je nach Situation kann die Verwendung des einen oder des anderen Datentyps nützlich sein. Beispielsweise kann der NumPy-Datentyp 'str' mit der Methode `pd.Series.sum()` verkettet werden.\n"
+      ],
+      "id": "7f47cca2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# mit NumPy-Datentyp 'str'\n",
+        "string_series = pd.Series(['H', 'a', 'l', 'l', 'o', '!'], dtype = 'str')\n",
+        "print(f\"Mit NumPy-Datentyp 'str': {string_series.sum()}\")\n",
+        "\n",
+        "# mit Pandas-Datentyp 'string'\n",
+        "try:\n",
+        "  string_series.astype('string').sum()\n",
+        "except Exception as error:\n",
+        "  print(\"\\nMit Pandas-Datentyp 'string':\")\n",
+        "  print(error)"
+      ],
+      "id": "c8b00066",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        ":::"
+      ],
+      "id": "97ff88b9"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\mapoe004\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

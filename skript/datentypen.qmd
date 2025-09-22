@@ -1,6 +1,4 @@
 # Datentypen
-**An MF: Das Kapitel behandelt zu 80 Prozent NumPy... das kann man eventuell aufteilen.**
-
 Das Modul Pandas ist auf den Umgang mit unterschiedlichen Datentypen spezialisiert. Ein Dataframe kann unterschiedliche Datentypen enthalten (bspw. Zahlen und Wahrheitswerte).
 
 ```{python}

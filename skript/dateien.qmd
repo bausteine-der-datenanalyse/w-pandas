@@ -1,5 +1,4 @@
 # Dateien lesen und schreiben
-**Dieser Teil ist aus dem m-EsD**  
 Pandas bietet eine Reihe von Funktionen, um Dateien einzulesen und zu schreiben, deren Namensgebung einem einheitlichen Schema folgt. Funktionen zum Lesen von Dateien werden in der Form `pd.read_csv()` und Funktionen zum Schreiben in der Form `pd.to_csv()` aufgerufen. Mit Pandas können auch Dateien aus dem Internet abgerufen werden `pd.read_csv(URL)`.
 
 ```{python}
@@ -167,8 +166,6 @@ In der Spalte Date sind Datums- und Zeitinformationen in der Form 'Monat/Tag/Jah
 
 2. Berechnen Sie die Höchstkurse für jede Woche (intraday).
 
-**Aufgabe 2 kann Marc testen, ob die zu schwierig ist.**
-
 ::: {#tip-musterloesungzeitreihe .callout-tip collapse="true"} 
 ## Musterlösung Zeitreihen einlesen
 
@@ -206,4 +203,4 @@ stock.groupby(by = ['year', 'week'])['High'].max().plot(ylabel = 'Wochenhöchstk
 :::
 
 ## Schwierige Dateien einlesen
-Das Einlesen von Dateien ist nicht immer einfach. Werkzeuge und Strategien zur Bewältigung schwieriger Fälle finden Sie im Methodenbaustein Einlesen strukturierter Datensätze **Querverweis auf m-EsD**. Dort wird auch der Umgang mit fehlenden Werten ausführlich behandelt.
+Das Einlesen von Dateien ist nicht immer einfach. Werkzeuge und Strategien zur Bewältigung schwieriger Fälle finden Sie im [Methodenbaustein Einlesen strukturierter Datensätze](https://bausteine-der-datenanalyse.github.io/m-einlesen-strukturierter-datensaetze/output/book/). Dort wird auch der Umgang mit fehlenden Werten ausführlich behandelt.

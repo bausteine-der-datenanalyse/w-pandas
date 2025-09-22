@@ -1,5 +1,4 @@
 # Zeitreihen
-**Dieser Teil ist weitgehend aus dem m-EsD**  
 Die Verarbeitung von Datums- und Zeitinformationen wird in Python durch verschiedene Module ermöglicht. Einleitend werden einige dieser Module kurz vorgestellt, da in der Dokumentation gelegentlich auf diese verwiesen wird. Pandas bietet einen einheitlichen Zugang zu den meisten dieser Funktionen und verwendet die NumPy Datentypen `datetime64` und `timedelta64`.
 
   - Der Datentyp `datetime64` beschreibt einen bestimmten Zeitpunkt an einem bestimmten Datum und gehört zu der Klasse `Timestamp`. Der Datentyp hat die Einheit Nanosekunden und kann Informationen über die Zeitzone speichern.
@@ -131,7 +130,6 @@ Die Module calendar, NumPy und Pandas verwenden den um die Zeit vor seiner Einf�
 
 
 ## datetime in Pandas
-**Dieser Teil ist aus dem m-EsD**  
 Pandas nutzt den NumPy-Datentyp `datetime64`, um Datums- und Zeitinformationen zu verarbeiten. In Pandas werden `datetime64`-Objekte mit den Funktionen `pd.to_datetime()` oder `pd.date_range()` angelegt.  
 *Hinweis: Eine weitere Möglichkeit ist die Funktion `pd.Timestamp()`, die umfangreichere Möglichkeiten zur Erzeugung eines Zeitpunkts bietet, aber kein string-parsing unterstützt.*
 
