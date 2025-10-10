@@ -1,0 +1,6 @@
+# Das Wichtigste
+Pandas ist ein Rundum-sorglos-Paket für die Datenanalyse. Die DataFrame-Struktur macht es leicht, Datensätze einzulesen und zu bearbeiten. Die hohe Integration von Funktionen aus den Paketen NumPy und Matplotlib erlaubt ein flüssiges Arbeiten. Umso wichtiger ist es, die damit verbundene Komplexität im Hintergrund nicht zu vergessen. Die Funktionen und Methoden des Moduls haben oft unzählige Parameter. Auch entwickeln sich Pakete wie NumPy und Pandas nicht immer in die selbe Richtung. Dadurch kommt es leicht zu unbemerkten Fehlern infolge von Versionssprüngen. Deshalb ist es wichtig, immer wieder in die Dokumentation zu schauen. Trotzdem: Pandas ist eine solide Basis für die Datenanalyse. 
+
+<div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
+  <iframe src="https://av.tib.eu/player/71641" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div>

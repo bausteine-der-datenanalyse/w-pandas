@@ -206,7 +206,3 @@ stock.groupby(by = ['year', 'week'])['High'].max().plot(ylabel = 'Wochenhöchstk
 
 ## Schwierige Dateien einlesen
 Das Einlesen von Dateien ist nicht immer einfach. Werkzeuge und Strategien zur Bewältigung schwieriger Fälle finden Sie im [Methodenbaustein Einlesen strukturierter Datensätze](https://bausteine-der-datenanalyse.github.io/m-einlesen-strukturierter-datensaetze/output/book/). Dort wird auch der Umgang mit fehlenden Werten ausführlich behandelt.
-
-<div style="position: relative; width: 100%; aspect-ratio: 16 / 9;">
-  <iframe src="https://av.tib.eu/player/71641" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
-</div>
