@@ -324,9 +324,9 @@ print(pd.to_datetime('now') - pd.to_datetime('YYYY-MM-DDTHH:MM')).total_seconds(
 
 Aufgabe 2
 
-´´´ {.raw}
+``` {.raw}
 print(pd.to_datetime('YYYY-MM-DD').day_of_week)
-´´´
+``` 
 
 Aufgabe 3
 
@@ -337,7 +337,7 @@ Aufgabe 3
 Aufgabe 4
 
 ```{python}
-schaltjahre = pd.date_range(start = '1901', end = '2000', freq = 'Y')
+schaltjahre = pd.date_range(start = '1901', end = '2000', freq = 'YE')
 schaltjahre = schaltjahre[schaltjahre.is_leap_year]
 print(schaltjahre.year)
 ```

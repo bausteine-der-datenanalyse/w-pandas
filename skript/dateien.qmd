@@ -144,11 +144,10 @@ Andere Formate werden mit dem Parameter `date_format` spezifiziert. Mit Hilfe de
 
 Datumsinformationen können aber auch nachträglich als solche deklariert werden. Dafür wird die Funktion `pd.to_datetime(arg, format = " ... ")` verwendet. Mit dem Parameter `arg` wird die zu konvertierende Spalte übergeben. Mit dem Parameter `format` kann wie mit dem Parameter `date_format` ein von der ISO8601 abweichendes Datumsformat spezifiziert werden.  
 
+## Aufgaben Zeitreihen einlesen
 Unter dem Pfad '01-daten/Microsoft_Stock.csv' sind Kursdaten der Microsoft-Aktie gespeichert.
 
 ::: {.border}
-
-Microsoft Stock- Time Series Analysis von Vijay V Venkitesh steht unter der Lizenz [CC0](https://creativecommons.org/publicdomain/zero/1.0/) und ist auf [kaggle](https://www.kaggle.com/datasets/vijayvvenkitesh/microsoft-stock-time-series-analysis) abrufbar. 2021
 
 ```{python}
 stock = pd.read_csv(filepath_or_buffer = '01-daten/Microsoft_Stock.csv')
@@ -157,13 +156,14 @@ print(stock.head(), "\n")
 print(stock.info())
 ```
 
+Microsoft Stock- Time Series Analysis von Vijay V Venkitesh steht unter der Lizenz [CC0](https://creativecommons.org/publicdomain/zero/1.0/) und ist auf [kaggle](https://www.kaggle.com/datasets/vijayvvenkitesh/microsoft-stock-time-series-analysis) abrufbar. 2021
+
 :::
 
 &nbsp;
 
-In der Spalte Date sind Datums- und Zeitinformationen in der Form 'Monat/Tag/Jahr Stunde:Minute:Sekunde' verzeichnet, die von Pandas nicht automatisch erkannt wurden. Die Spalte hat deshalb den Datentyp object erhalten.
+In der Spalte 'Date' sind Datums- und Zeitinformationen in der Form 'Monat/Tag/Jahr Stunde:Minute:Sekunde' verzeichnet, die von Pandas nicht automatisch erkannt wurden. Die Spalte hat deshalb den Datentyp object erhalten.
 
-## Aufgaben Zeitreihen einlesen
 1. Übergeben Sie der Funktion `pd.read_csv()` die erforderlichen Argumente, um die Spalte Date korrekt als datetime einzulesen.
 
 2. Berechnen Sie die Höchstkurse für jede Woche (intraday).

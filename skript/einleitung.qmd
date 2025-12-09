@@ -67,7 +67,7 @@ Beim Anlegen einer `pd.Series` können verschiedene Parameter übergeben werden:
   - `pd.Series(data, name = 'der Name')` legt einen Namen für die Series fest.
 
 ```{python}
-numerische_series = pd.Series([1, 2, 3], dtype = 'float', index = ['A1', 'B2', 'C3'],name = 'Gleitkommazahlen')
+numerische_series = pd.Series([1, 2, 3], dtype = 'float', index = ['A1', 'B2', 'C3'], name = 'Gleitkommazahlen')
 print(numerische_series)
 ```
 
@@ -86,6 +86,7 @@ print(f"\nDie geänderte Series:\n{numerische_series}")
 
 ### Aufgabe Series
 Ändern Sie den Datentyp des Objekts 'numerische_series' in Ganzzahl und wählen Sie einen neuen Namen für die Series aus.
+`numerische_series = pd.Series([1, 2, 3], dtype = 'float', index = ['A1', 'B2', 'C3'], name = 'Gleitkommazahlen')`
 
 ::: {#tip-dtype .callout-tip collapse="true"}
 ## Musterlösung dtype
@@ -409,14 +410,14 @@ print(sechs_zahlen.loc[['c', 'f', 'a']]) # Liste
 print(sechs_zahlen.loc['c':'e']) # Slice
 ```
 
-Die Interpretation als Beschriftung bedeutet, dass bei einem nicht numerischen Index, 
-übergebene Zahlen nicht gefunden werden.
-
+Die Interpretation als Beschriftung bedeutet, dass bei einem nicht numerischen Index  als Slice übergebene Zahlen nicht gefunden werden. Hier muss mit der übergebenen Beschriftung gearbeitet werden.
 ```{python}
 try:
   print(sechs_zahlen.loc[2:4])
 except Exception as error:
   print(error)
+
+print("\n", sechs_zahlen.loc['c':'e'], sep = "\n")
 ```
 
 Für DataFrames funktioniert das Slicing genauso.
@@ -456,13 +457,14 @@ print(meerschweinchen['len'].tail(3))
 ```
 
 ## Aufgaben Slicing
-1. Gegeben ist eine Pandas Series 'temperaturen_2021' mit den durchschnittlichen Monatstemperaturen. Wählen Sie die Temperaturen für die Frühlingsmonate (März bis Mai) aus.
-
+Gegeben ist eine Pandas Series 'temperaturen_2021' mit den durchschnittlichen Monatstemperaturen.
 ```{python}
 temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5],
                          index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 
                          'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])
 ```
+
+1. Wählen Sie die Temperaturen für die Frühlingsmonate (März bis Mai) aus.
 
 2. Wählen Sie die Temperaturen für die letzten drei Monate des Jahres einmal mit Hilfe des Slicing Operators und einmal mit Hilfe der Pandas-Methoden aus.
 
@@ -480,8 +482,8 @@ print(temperaturen_2021.loc[['Mär', 'Apr', 'Mai']])
 
 Aufgabe 2
 ```{python}
-print(temperaturen_2021[len(temperaturen_2021)-3:], "\n")
-print(temperaturen_2021.iloc[len(temperaturen_2021)-3:])
+print(temperaturen_2021[-3:], "\n")
+print(temperaturen_2021.iloc[-3:])
 ```
 
 Aufgabe 3
@@ -520,6 +522,10 @@ print(pd.concat([series_1, series_2], ignore_index = True, axis = 1))
 Gleichermaßen können DataFrames verbunden werden.
 
 ```{python}
+temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5],
+                         index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 
+                         'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])
+                         
 temperaturen_2022 = pd.Series([3, 6, 9, 13, 18, 21, 24, 23, 19, 14, 8, 4],
                          index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 
                          'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])

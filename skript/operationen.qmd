@@ -237,6 +237,21 @@ Der Vollständigkeit wegen ist zu erwähnen, dass mit den Methoden `.map()` und 
 
 
 ## Aufgaben Operationen
+Gegeben ist der DataFrame temperaturen.
+
+```{python}
+# Temperaturdaten
+temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5])
+temperaturen_2022 = pd.Series([3, 6, 9, 13, 18, 21, 24, 23, 19, 14, 8, 4])
+temperaturen_2023 = pd.Series([-3, -1, 4, 9, 15, 20, 20, 19, 16, 15, 7, 6])
+temperaturen_2024 = pd.Series([-1, 2, 5, 8, 17, 24, 25, 20, 17, 14, 9, 2])
+
+# DataFrame erzeugen
+temperaturen = pd.concat([temperaturen_2021, temperaturen_2022, temperaturen_2023, temperaturen_2024], axis = 1)
+temperaturen.columns = [2021, 2022, 2023, 2024]
+temperaturen.index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez']
+```
+
 1. Bestimmen Sie für den Dataframe temperaturen die monatliche Mediantemperatur.
 
 2. Ermitteln Sie die Monate mit einer Mediantemperatur größer gleich 21 Grad.
