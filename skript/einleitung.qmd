@@ -91,8 +91,14 @@ print(f"\nDie geänderte Series:\n{numerische_series}")
 ::: {#tip-dtype .callout-tip collapse="true"}
 ## Musterlösung dtype
 ```{python}
+numerische_series = pd.Series([1, 2, 3], dtype = 'float', index = ['A1', 'B2', 'C3'], name = 'Gleitkommazahlen')
+
 numerische_series.name = 'Ganzzahlen'
-numerische_series = numerische_series.astype('float')
+
+# falls numerische_series vorher vom dtype string ist,
+# muss erst in dtype float konvertiert werden
+# numerische_series = numerische_series.astype('float')
+
 numerische_series = numerische_series.astype('int')
 
 print(numerische_series)
@@ -525,7 +531,7 @@ Gleichermaßen können DataFrames verbunden werden.
 temperaturen_2021 = pd.Series([2, 4, 7, 12, 19, 23, 25, 23, 18, 15, 9, 5],
                          index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 
                          'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])
-                         
+
 temperaturen_2022 = pd.Series([3, 6, 9, 13, 18, 21, 24, 23, 19, 14, 8, 4],
                          index = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 
                          'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'])
@@ -562,9 +568,9 @@ Legen Sie einen leeren DataFrame `df = pd.DataFrame()` an.
 
 1. Fügen Sie die Spalten 'len' und 'dose' aus dem DataFrame 'meerschweinchen' ein.
 
-2. Löschen Sie alle ungeraden Zeilennummern aus dem DataFrame df.
+2. Löschen Sie alle ungeraden Zeilen aus dem DataFrame df.
 
-3. Benutzen Sie die Indexnummern des DataFrame df, um die entsprechenden Zeilen aus der Spalte 'ID' des DataFrame 'meerschweinchen' auszuwählen. Fügen Sie diese als Spalte an Indexposition 0 in den DataFrame df ein.
+3. Benutzen Sie die Indizes der verbleibenden geraden Zeilen des DataFrame df, um die entsprechenden Zeilen aus der Spalte 'ID' des DataFrame 'meerschweinchen' auszuwählen. Fügen Sie diese als Spalte an Indexposition 0 in den DataFrame df ein.
 
 ::: {#tip-mergeanddelete .callout-tip collapse="true"}
 ## Musterlösung verbinden und löschen

@@ -1,4 +1,4 @@
-Folgende Bausteine sollte Sie bereits bearbeitet haben:
+Die Bearbeitungszeit dieses Bausteins beträgt circa 8 Stunden. Folgende Bausteine sollte Sie bereits bearbeitet haben:
 
 - w-Python
 - w-NumPy
