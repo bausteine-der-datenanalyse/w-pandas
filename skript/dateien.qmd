@@ -41,7 +41,7 @@ Im Folgenden wird der Datensatz palmerpenguins mit Pandas eingelesen.
 
 **palmerpenguins**
 
-![Pinguine des Palmer-Station-Datensatzes](00-bilder/lter_penguins_allison_horst_CC0.png)
+![Pinguine des Palmer-Station-Datensatzes](00-bilder/lter_penguins_allison_horst_CC0.png){fig-alt="illustrative Grafik der Pinguine"}
 
 Meet the Palmer penguins von \@allison_horst steht unter der Lizenz [CC0-1.0](https://github.com/allisonhorst/palmerpenguins?tab=CC0-1.0-1-ov-file#creative-commons) und ist auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins) abrufbar. 2020
 
@@ -73,7 +73,7 @@ print(penguins.head())
 
 ::: {.border}
 
-![Schnabeldimensionen](00-bilder/culmen_depth_allison_horst_CC0.png)
+![Schnabeldimensionen](00-bilder/culmen_depth_allison_horst_CC0.png){fig-alt:"illustrative Grafik des Pinguinschnabels"}
 
 Bill dimensions von \@allison_horst steht unter der Lizenz [CC0-1.0](https://github.com/allisonhorst/palmerpenguins?tab=CC0-1.0-1-ov-file#creative-commons) und ist auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins) abrufbar. 2020
 
@@ -186,6 +186,8 @@ print(stock.info())
 Die Pandas-Methode `Series.dt.weekofyear()` wird seit einiger Zeit nicht mehr unterstützt ([siehe Dokumentation](https://pandas.pydata.org/pandas-docs/version/1.5/reference/api/pandas.Series.dt.weekofyear.html)). Die Funktion wurde durch `Series.dt.isocalendar().week` ersetzt. 
 
 ```{python}
+#| fig-alt: "Kursentwicklung der Microsoft-Aktie"
+
 # Jahr und Woche isolieren
 print(stock['Date'].dt.isocalendar().week.head(), "\n")
 print(stock['Date'].dt.isocalendar().year.tail())

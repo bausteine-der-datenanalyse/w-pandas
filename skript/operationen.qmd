@@ -313,7 +313,7 @@ print(temperaturen.where(temperaturen == 25, other = 1000))
 ## Aufgaben suchen und ersetzen
 1. Bestimmen Sie die Position der Werte im DataFrame 'temperaturen', die kleiner als 0 sind und geben Sie die Werte aus.
 
-2. Ersetzen Sie alle Werte im DataFrame temperaturen, die kleiner sind als 0 durch den Wert 0 und geben Sie das Ergebnis aus.
+2. Ersetzen Sie alle Werte im DataFrame 'temperaturen', die kleiner sind als 0 durch den Wert 0 und geben Sie das Ergebnis aus.
 
 ::: {#tip-loesung-suchenersetzen .callout-tip collapse="true"}
 ## Musterlösung suchen und ersetzen
@@ -360,7 +360,7 @@ except Exception as error:
 ```
 
 ## Aufgaben Sortieren
-1. Sortieren Sie den DataFrame meerschweinchen absteigend nach der Zahnlänge ('len'). Welches Meerschweinchen hat die längste zahnbildende Zelle (gesucht ist die ID)?
+1. Sortieren Sie den DataFrame 'meerschweinchen' absteigend nach der Zahnlänge ('len'). Welches Meerschweinchen hat die längste zahnbildende Zelle (gesucht ist die ID)?
 
 2. Welches Meerschweinchen, welches die Dosis 1.0 erhielt, hat die längste zahnbildende Zelle (gesucht ist die ID)?
 

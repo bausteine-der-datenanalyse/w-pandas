@@ -93,7 +93,7 @@ UTC steht für Coordinated Universal Time (auch bekannt als Greenwich Mean Time)
 Eine Umwandlung in die koordinierte Weltzeit ist in NumPy bislang noch nicht umgesetzt. ([Dokumentation NumPy](https://numpy.org/doc/stable/reference/arrays.datetime.html), [Wikipedia](https://de.wikipedia.org/wiki/Internationale_Atomzeit)).
 :::
 
-### Zeitumstellung - Dailight Saving Time
+### Zeitumstellung - Daylight Saving Time
 ::: {.border layout="[5, 90, 5]"}
 
 &nbsp;

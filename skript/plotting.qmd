@@ -45,7 +45,7 @@ Einige sinnvolle Parameter sind:
 
   - `colormap = palette` ändert die Farbpalette. Eine Liste der in matplotlib verfügbaren Paletten finden Sie in der [Dokumentation](https://matplotlib.org/stable/users/explain/colors/colormaps.html).
   - `figsize = (Breite, Höhe)` Tupel der Bildgröße in Zoll
-  - `legend = True` zeichnet eine Legende ein..
+  - `legend = True` zeichnet eine Legende ein.
   - `title = 'Titel'` trägt einen Titel ein.
   - `grid = True` fügt Gitternetzlinien ein.
   - `xlim = (min, max)` / `ylim = (min, max)` setzt den Wertebereich der x- bzw. y-Achse.
@@ -94,7 +94,7 @@ meerschweinchen.plot(x = 'ID', y = ['dose', 'len'], subplots = True, sharex = Fa
 
 &nbsp;
 
-Um die überdeckte Beschriftung der x-Achse zu beheben, muss auf einen Befehl aus dem Modul matplotlib.pyplot zurückgegriffen werden.
+Um die überdeckte Beschriftung der x-Achse zu beheben, muss auf den Befehl `plt.tight_layout()` aus dem Modul matplotlib.pyplot zurückgegriffen werden.
 ```{python}
 #| fig-alt: "Liniendiagramm der Vitamin C Dosis und der Länge der zahnbildenden Zellen in zwei Teilgrafiken gegen die auf der x-Achse aufgetragene ID im Datensatz meerschweinchen. Die Grafik zeigt die Code-Ausführung und hat keine inhaltliche Bedeutung."
 
