@@ -46,7 +46,7 @@ Datetime-Objekte werden abhängig davon, ob sie Informationen über Zeitzonen en
 Pandas kann mit Zeitzonen umgehen und datetime-Objekte von einer in eine andere Zeitzone umwandeln. Über das Argument `tz` kann in verschiedenen Funktionen die Zeitzone angegeben werden.
 
 ``` {python}
-zeitreihe = pd.Series(pd.date_range(start = "2023-03-26T00:00", end = "2023-03-27T00:00", freq = "3h", tz = "turkey"))
+zeitreihe = pd.Series(pd.date_range(start = "2023-03-26T00:00", end = "2023-03-27T00:00", freq = "3h", tz = "Turkey"))
 zeitreihe
 ```
 
@@ -59,7 +59,7 @@ pd.to_datetime(zeitreihe, utc = True)
 Eine Umwandlung in beliebige Zeitzonen ist mit der Methode `pd.Series.dt.tz_convert(tz = 'utc')` möglich.
 
 ``` {python}
-zeitreihe.dt.tz_convert(tz = 'portugal')
+zeitreihe.dt.tz_convert(tz = 'Portugal')
 ```
 
 ::: {#nte-zeitzonen .callout-note collapse="true"}
@@ -182,7 +182,7 @@ Die Funktion `pd.date_range()` erzeugt ein Array vom Typ `DatetimeIndex` mit dty
 
 print(pd.date_range(start = '2017', end = '2024', periods = 3), "\n")
 
-print(pd.date_range(start = '2017', end = '2024', freq = 'Y'), "\n")
+print(pd.date_range(start = '2017', end = '2024', freq = 'YE'), "\n")
 
 print(pd.date_range(end = '2024', freq = 'h', periods = 3))
 ```
