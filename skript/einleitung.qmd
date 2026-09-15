@@ -282,7 +282,7 @@ Der Datensatz kann in R mit dem Befehl "ToothGrowth" aufgerufen werden.
 
 &nbsp;
 
-Ein Aussschnitt des Datensatzes:
+Ein Ausschnitt des Datensatzes:
 ```{python}
 #| echo: false
 
@@ -449,7 +449,7 @@ print(meerschweinchen.iloc[[27, 29, 52], 2:4]) # Liste und Slice
 ```
 
 #### Die Methoden .head() und .tail()
-Vereinfachte Varianten des indexbasierten Slicings sind die Methoden `.head(n=5)` und `.tail(n=5)`, mit denen die ersten bzw. letzten n Zeilen eines DataFrame oder einer Series ausgegeben werden  können. Über den optionalen Paramenter `n` kann die Anzahl der angezeigten Zeilen gesteuert werden. Die Methoden eignen sich gut, um sich einen ersten Eindruck von einem Datensatz zu verschaffen.
+Vereinfachte Varianten des indexbasierten Slicings sind die Methoden `.head(n=5)` und `.tail(n=5)`, mit denen die ersten bzw. letzten n Zeilen eines DataFrame oder einer Series ausgegeben werden  können. Über den optionalen Parameter `n` kann die Anzahl der angezeigten Zeilen gesteuert werden. Die Methoden eignen sich gut, um sich einen ersten Eindruck von einem Datensatz zu verschaffen.
 
 ```{python}
 print(meerschweinchen.head(3), "\n")
@@ -559,7 +559,7 @@ Der Operator `del` aus der Pythonbasis löscht Spalten aus einem DataFrame, zum 
 
   - `pd.DataFrame.drop(labels = None, axis = 0, index = None, columns = None, inplace = False)` entfernt Zeilen oder Spalten nach den mit dem Parameter `labels` als Einzelwert (`'Spalte 1'`) oder als Liste (`['Spalte 1', 'Spalte 2']`) übergebenen Beschriftungen. Der Parameter `axis` steuert, ob Zeilen oder Spalten (`axis = 1`) entfernt werden sollen. Die Parameter `index` und `columns` sind  alternative Möglichkeiten, Index- oder Spaltenbeschriftungen direkt zu übergeben und ersetzen die Parameter `labels` und `axis`.
 
-  - `pd.DataFrame.insert(loc, column, value)` fügt eine Spalte an Position `loc` mit dem Spaltennamen `column` und dem Inhalt `value` ein. Falls `value` eine Series mit abweichendem Index ist, kann über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen und diese in den bestehenden Index einfgefügt werden (andernfalls gleicht Pandas die Indizes der Series und des DataFrames ab und fügt nur die Werte übereinstimmender Indizes ein).
+  - `pd.DataFrame.insert(loc, column, value)` fügt eine Spalte an Position `loc` mit dem Spaltennamen `column` und dem Inhalt `value` ein. Falls `value` eine Series mit abweichendem Index ist, kann über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen und diese in den bestehenden Index eingefügt werden (andernfalls gleicht Pandas die Indizes der Series und des DataFrames ab und fügt nur die Werte übereinstimmender Indizes ein).
 
   - Werte können zeilenweise mit der Methode `pd.DataFrame.loc[index] = value` eingefügt werden. Falls `value` eine Series ist, muss über das Attribut `value = Series.values` auf die enthaltenen Werte der Series zugegriffen werden, da Pandas andernfalls versucht, den Index der Series mit den Spaltennamen des DataFrames abzugleichen. Wird als `value` ein Einzelwert übergeben, füllt dieser die gesamte Zeile aus.
 
