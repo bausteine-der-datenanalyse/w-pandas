@@ -73,7 +73,7 @@ print(penguins.head())
 
 ::: {.border}
 
-![Schnabeldimensionen](00-bilder/culmen_depth_allison_horst_CC0.png){fig-alt:"illustrative Grafik des Pinguinschnabels"}
+![Schnabeldimensionen](00-bilder/culmen_depth_allison_horst_CC0.png){fig-alt="illustrative Grafik des Pinguinschnabels"}
 
 Bill dimensions von \@allison_horst steht unter der Lizenz [CC0-1.0](https://github.com/allisonhorst/palmerpenguins?tab=CC0-1.0-1-ov-file#creative-commons) und ist auf [GitHub](https://github.com/allisonhorst/palmerpenguins?tab=readme-ov-file#meet-the-palmer-penguins) abrufbar. 2020
 
